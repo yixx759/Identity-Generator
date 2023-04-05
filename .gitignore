@@ -1,0 +1,11 @@
+/.idea/
+/latents/
+/results/
+/mine/
+/global/CustomIdentities/**
+/global/Dataset/**
+/global/data/**
+/global/static/**
+/global/here/**
+/global/here/**
+/global/stylegan2-ffhq-config-f.pt

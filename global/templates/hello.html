@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>yay</title>
+</head>
+<body>
+<img src="{{url_for('static', filename='1.jpg')}}" height="500" width="500">
+<img src="{{url_for('static', filename='0.jpg')}}" height="500" width="500">
+<br>
+<form method="post">
+    <input type="text" name="neutral">
+    <input type="text" name="text">
+    <br>
+    <input type="range" min="-15" max="25" name="Strength">
+    <br>
+    <input type="range" min="8" max="40" name="Disentangle">
+    <input type="submit">
+
+</form>
+</body>
+</html>
