@@ -37,10 +37,10 @@ class StyleCLIP():
 
         if norm:
 
-            w_plus=np.load('./data/'+dataset_name+'/w_plus.npy')
+            #w_plus=np.load('./data/'+dataset_name+'/w_plus.npy')
 
 
-            #w_plus = np.load('./Dataset/W_plus/w_plus'+ str(num)+'.npy')
+            w_plus = np.load('./Dataset/W_plus/w_plus'+ str(num)+'.npy')
         else:
             w_plus = np.load('./CustomIdentities/Identity' + str(num) +'/BaseIdentity/w_plus.npy')
 

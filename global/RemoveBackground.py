@@ -30,10 +30,26 @@ def main(input, output):
     with open(filename, "wb") as a:
         a.write(f)
 
-    im = Image.open(output)
-    jpg = im.convert('RGB')
-    jpg.save(output)
 
+    backpath = "./static/Background/white.png"
+
+    background = Image.open(backpath).convert("RGBA")
+
+    #background.save(output)
+    print("Heeere")
+    im = Image.open(filename).convert("RGBA")
+    # background = Image.new("RGBA", im.size)
+    # background.alpha_composite(temp)
+    #background.alpha_composite(im)
+    #im = im.convert("RGBA")
+    #im.save(output)
+    #background.paste(im, (0,0))
+
+    background.paste(im, (50,50), im)
+
+    #background.save(output)
+    #remove alpha for encodeing
+    background.convert("RGB").save(output)
 
 if __name__ == "__main__":
     subprocess.Popen("start Activate.bat", shell=True)
@@ -51,5 +67,5 @@ if __name__ == "__main__":
 
 
 
-    main(".\here\yum.jpg","./here/newyum.jpg")
+    main(".\here\yum.png","./here/newyum.jpg")
 

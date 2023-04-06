@@ -9,3 +9,5 @@
 /global/here/**
 /global/here/**
 /global/stylegan2-ffhq-config-f.pt
+/global/data/**
+/optimization/stylegan2-ffhq-config-f.pt

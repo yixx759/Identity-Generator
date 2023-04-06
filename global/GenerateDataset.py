@@ -36,25 +36,25 @@ for i in range(Testgroup):
 
 
 
-params2 = [{'natural':'person with clothes ', 'target':'person with white shirt','strength':'4','disentanglment':'20','save':'2'},
+params2 = [{'natural':'person with clothes ', 'target':'person with white shirt','strength':'4','disentanglment':'10','save':'2'},
 
-{'natural':'face with hair', 'target':'face without hair','strength':'6.52','disentanglment':'15.9','save':'2'},
-{'natural':'face with hair', 'target':'face without hair','strength':'6.52','disentanglment':'18.9','save':'2'},
+{'natural':'face with hair', 'target':'face without hair','strength':'6.52','disentanglment':'13.9','save':'2'},
+{'natural':'face with hair', 'target':'face without hair','strength':'6.52','disentanglment':'20.9','save':'2'},
     {'natural':'person ', 'target':'person with beard','strength':'-1','disentanglment':'9','save':'2'},
 {'natural':'person ', 'target':'person clean shaven','strength':'-2','disentanglment':'8','save':'2'},
-    {'natural':'Makeup', 'target':'no makeup','strength':'2','disentanglment':'3','save':'4'},
+    {'natural':'Makeup', 'target':'no makeup','strength':'3','disentanglment':'3','save':'4'},
 
 {'natural':'Person with glasses', 'target':'Person with no glasses','strength':'5','disentanglment':'11','save':'2'},
 {'natural':'Person with glasses', 'target':'Person with no glasses','strength':'3','disentanglment':'11','save':'2'},
  {'natural':'overweight person', 'target':'skinny person ','strength':'1','disentanglment':'9','save':'2'},
-{'natural':'hair', 'target':'tidy dark hair ','strength':'3','disentanglment':'4','save':'2'},
-{'natural':'person', 'target':'person  smiling','strength':'-3','disentanglment':'20','save':'7'},
-{'natural':'person open mouth', 'target':'person  closed mouth','strength':'1','disentanglment':'17','save':'2'},
-{'natural':'child', 'target':'adult','strength':'2','disentanglment':'2','save':'2'},
-{'natural':'busy background', 'target':'simple background','strength':'3.619','disentanglment':'15','save':'2'},
-{'natural':'colored background', 'target':'white background','strength':'2.65','disentanglment':'15','save':'2'}]
+{'natural':'hair', 'target':'tidy dark hair ','strength':'3','disentanglment':'13','save':'2'},
+{'natural':'person', 'target':'person  smiling','strength':'-3','disentanglment':'10','save':'7'},
+{'natural':'person open mouth', 'target':'person  closed mouth','strength':'2','disentanglment':'10','save':'2'},
+{'natural':'child', 'target':'adult','strength':'2','disentanglment':'5','save':'2'},
+{'natural':'busy background', 'target':'simple background','strength':'3.619','disentanglment':'10','save':'2'},
+{'natural':'colored background', 'target':'white background','strength':'2.65','disentanglment':'10','save':'2'}]
 
-parmas3 = {'natural':'face side view', 'target':'face front view','strength':'20','disentanglment':'9','save':'2'}
+parmas3 = {'natural':'face side view', 'target':'face front view','strength':'20','disentanglment':'7','save':'2'}
 #parmas3 = {'natural':'face with hair', 'target':'face with long hair','strength':'20','disentanglment':'8.6','save':'2'}
 #face front view  20 8.6
 
