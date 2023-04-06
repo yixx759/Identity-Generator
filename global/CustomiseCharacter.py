@@ -38,7 +38,7 @@ hair3 =[
         ]
 
 hair4 =[
-        {'natural':'face with without facial hair', 'target':'face with with beard','strength':'14','disentanglment':'12','save':'beard'},
+        {'natural':'face with without facial hair', 'target':'face with with beard','strength':'16','disentanglment':'9','save':'beard'},
         {'natural':'face with without facial hair', 'target':'face with with beard','strength':'11','disentanglment':'12','save':'strong facial hair'},
         {'natural':'face with without facial hair', 'target':'face with with beard','strength':'8','disentanglment':'12','save':'medium facial hair'},
         {'natural':'face with without facial hair', 'target':'face with with beard','strength':'7','disentanglment':'12','save':'light facial hair'},
@@ -75,9 +75,9 @@ hair8 =[
 
         ]
 hair9 =[
-        {'natural':'face', 'target':'face wide nose','strength':'6','disentanglment':'8.5','save':'wide nose'},
-        {'natural':'face', 'target':'face wide nose','strength':'-6','disentanglment':'8.5','save':'thin nose'},
-        {'natural':'face', 'target':'face wide nose','strength':'0','disentanglment':'9.5','save':'neutral nose'},
+        {'natural':'no nose', 'target':'straight nose','strength':'15','disentanglment':'8.6','save':'wide nose'},
+        {'natural':'no nose', 'target':'straight nose','strength':'-15','disentanglment':'8.6','save':'thin nose'},
+        {'natural':'no nose', 'target':'straight nose','strength':'0','disentanglment':'8.5','save':'neutral nose'},
 
         ]
 
@@ -99,6 +99,17 @@ hair11 =[
         {'natural':'face', 'target':'scared','strength':'3.5','disentanglment':'12','save':'scared expression'},
         {'natural':'face', 'target':'disgust','strength':'3','disentanglment':'12','save':'disgust expression'},
         {'natural':'face', 'target':'neutral','strength':'0','disentanglment':'10','save':'neutral expression'},
+        ]
+
+#fat thin
+hair12 =[
+        {'natural':'person', 'target':'fat person','strength':'1','disentanglment':'16.4','save':'fat person'},
+        {'natural':'person', 'target':'fat person','strength':'0.5','disentanglment':'16.4','save':'more overwieght person'},
+        {'natural':'person', 'target':'fat person','strength':'0.2','disentanglment':'16.4','save':'overwieght person'},
+        {'natural':'person', 'target':'fat person','strength':'0','disentanglment':'16.4','save':'neutral weight person'},
+        {'natural':'person', 'target':'fat person','strength':'-0.2','disentanglment':'16.4','save':'underwieght person'},
+        {'natural':'person', 'target':'fat person','strength':'-0.5','disentanglment':'16.4','save':'more underwieght person'},
+        {'natural':'person', 'target':'fat person','strength':'-1.3','disentanglment':'10','save':'skinny person'},
         ]
 
 #by either creating a 0 strength prompt or saving code using init of default starting image and add at first node
@@ -271,6 +282,7 @@ for i in range(testgroup):
     master.add(deepcopy(hair10))
     master.add(deepcopy(hair11))
     master.add(deepcopy(hair4))
+    master.add(deepcopy(hair12))
     master.callprompts()
 
 

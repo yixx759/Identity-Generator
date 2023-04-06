@@ -45,7 +45,7 @@ def main(input, output):
     #im.save(output)
     #background.paste(im, (0,0))
 
-    background.paste(im, (50,50), im)
+    background.paste(im, (0,0), im)
 
     #background.save(output)
     #remove alpha for encodeing
