@@ -39,7 +39,7 @@ for i in range(Testgroup):
 params2 = [{'natural':'person with clothes ', 'target':'person with white shirt','strength':'4','disentanglment':'10','save':'2'},
 
 {'natural':'face with hair', 'target':'face without hair','strength':'6.52','disentanglment':'13.9','save':'2'},
-{'natural':'face with hair', 'target':'face without hair','strength':'852','disentanglment':'20.9','save':'2'},
+{'natural':'face with hair', 'target':'face without hair','strength':'8','disentanglment':'20.9','save':'2'},
     {'natural':'person ', 'target':'person with beard','strength':'-1','disentanglment':'9','save':'2'},
 {'natural':'person ', 'target':'person clean shaven','strength':'-2','disentanglment':'8','save':'2'},
     {'natural':'Makeup', 'target':'no makeup','strength':'3','disentanglment':'3','save':'4'},

@@ -9,13 +9,15 @@ import tensorflow as tf
 testgroup = 10
 #CustomIdentities
 
-hair = [{'natural':'face with no hair', 'target':'face with short hair','strength':'10','disentanglment':'10','save':'short hair'},
-            {'natural':'face with no hair', 'target':'face with long hair','strength':'7','disentanglment':'10','save':'long hair'},
-            {'natural':'face with no hair', 'target':'face with bowlcut hair','strength':'5','disentanglment':'10','save':'bowlcut hair'},
-            {'natural':'face with no hair', 'target':'face with comb over hair','strength':'16','disentanglment':'10','save':'comb over hair'},
-            {'natural':'face with no hair', 'target':'face with afro hair','strength':'10','disentanglment':'10','save':'afro hair'},
-            {'natural':'face with no hair', 'target':'face with haircut','strength':'5','disentanglment':'10','save':'haircut hair'},
-            {'natural':'face with no hair', 'target':'face with curly hair','strength':'5.5','disentanglment':'10','save':'curly hair'},
+hair = [
+
+            {'natural':'face with no hair', 'target':'face with short hair','strength':'10','disentanglment':'18','save':'short hair'},
+            {'natural':'face with no hair', 'target':'face with long hair','strength':'7','disentanglment':'18','save':'long hair'},
+            {'natural':'face with no hair', 'target':'face with bowlcut hair','strength':'5','disentanglment':'18','save':'bowlcut hair'},
+            {'natural':'face with no hair', 'target':'face with comb over hair','strength':'16','disentanglment':'18','save':'comb over hair'},
+            {'natural':'face with no hair', 'target':'face with afro hair','strength':'10','disentanglment':'18','save':'afro hair'},
+            {'natural':'face with no hair', 'target':'face with haircut','strength':'5','disentanglment':'18','save':'haircut hair'},
+            {'natural':'face with no hair', 'target':'face with curly hair','strength':'5.5','disentanglment':'18','save':'curly hair'},
         ]
 
 
@@ -29,37 +31,37 @@ hair2 = [{'natural':'face with hair', 'target':'face with brown hair','strength'
             ]
 
 hair3 =[
-        {'natural':'face with hair', 'target':'face with bangs','strength':'-4','disentanglment':'10','save':'no bangs'},
+        {'natural':'face with hair', 'target':'face with bangs','strength':'-4','disentanglment':'18','save':'no bangs'},
 
-        {'natural':'face with hair', 'target':'face with fringe','strength':'3','disentanglment':'10','save':'fringe'},
-        {'natural':'face with hair', 'target':'face with no hair','strength':'0','disentanglment':'10','save':'none'},
-        {'natural':'face with hair', 'target':'face with hairline','strength':'-3','disentanglment':'10','save':'better hairline'},
-        {'natural':'face with hair', 'target':'face with bangs','strength':'4','disentanglment':'10','save':'bangs'},
+        {'natural':'face with hair', 'target':'face with fringe','strength':'3','disentanglment':'18','save':'fringe'},
+        {'natural':'face with hair', 'target':'face with no hair','strength':'0','disentanglment':'18','save':'none'},
+        {'natural':'face with hair', 'target':'face with hairline','strength':'-3','disentanglment':'18','save':'better hairline'},
+        {'natural':'face with hair', 'target':'face with bangs','strength':'4','disentanglment':'18','save':'bangs'},
         ]
 
 hair4 =[
-        {'natural':'face with without facial hair', 'target':'face with with beard','strength':'16','disentanglment':'9','save':'beard'},
-        {'natural':'face with without facial hair', 'target':'face with with beard','strength':'11','disentanglment':'12','save':'strong facial hair'},
-        {'natural':'face with without facial hair', 'target':'face with with beard','strength':'8','disentanglment':'12','save':'medium facial hair'},
-        {'natural':'face with without facial hair', 'target':'face with with beard','strength':'7','disentanglment':'12','save':'light facial hair'},
-        {'natural':'face with without facial hair', 'target':'face with with beard','strength':'4','disentanglment':'12','save':'very light facial hair'},
-        {'natural':'face with without facial hair', 'target':'face with with beard','strength':'0','disentanglment':'12','save':'no facial hair'},
-        {'natural':'face', 'target':'face with with stubble','strength':'3','disentanglment':'13','save':'stubble'},
-        {'natural':'face', 'target':'face with with stubble','strength':'6','disentanglment':'13','save':'heavy stubble'},
+        {'natural':'face without facial hair', 'target':'face with with beard','strength':'13','disentanglment':'18','save':'beard'},
+        {'natural':'face without facial hair', 'target':'face with with beard','strength':'10','disentanglment':'18','save':'strong facial hair'},
+        {'natural':'face without facial hair', 'target':'face with with beard','strength':'8','disentanglment':'18','save':'medium facial hair'},
+        {'natural':'face without facial hair', 'target':'face with with beard','strength':'7.5','disentanglment':'18','save':'light facial hair'},
+        {'natural':'face without facial hair', 'target':'face with with beard','strength':'7','disentanglment':'18','save':'very light facial hair'},
+        {'natural':'face without facial hair', 'target':'face with with beard','strength':'0','disentanglment':'18','save':'no facial hair'},
+        {'natural':'face', 'target':'face with stubble','strength':'6','disentanglment':'11','save':'stubble'},
+        {'natural':'face', 'target':'face with stubble','strength':'9','disentanglment':'11','save':'heavy stubble'},
         ]
 
 hair5 =[
-        {'natural':'face', 'target':'face big lips','strength':'2','disentanglment':'9','save':'big lips'},
-        {'natural':'no eyebrows', 'target':'eyebrows','strength':'-2','disentanglment':'9','save':'thin lips'},
-        {'natural':'no eyebrows', 'target':'eyebrows','strength':'0','disentanglment':'9','save':'neutral lips'},
+        {'natural':'face', 'target':'face big lips','strength':'4','disentanglment':'18','save':'big lips'},
+        {'natural':'face', 'target':'face big lips','strength':'-4','disentanglment':'18','save':'thin lips'},
+        {'natural':'no eyebrows', 'target':'eyebrows','strength':'0','disentanglment':'18','save':'neutral lips'},
 
         ]
 
 hair6 =[
-        {'natural':'face', 'target':'face shut eyes','strength':'6.28','disentanglment':'9.2','save':'closed eyes'},
-        {'natural':'face', 'target':'face left winking eye','strength':'13','disentanglment':'10','save':'left winking eye'},
-        {'natural':'face', 'target':'face wide eyes','strength':'8','disentanglment':'10','save':'wide eyes'},
-        {'natural':'face', 'target':'face left winking eye','strength':'0','disentanglment':'10','save':'normal eyes'},
+        {'natural':'face', 'target':'face shut eyes','strength':'6.28','disentanglment':'19.2','save':'closed eyes'},
+        {'natural':'face', 'target':'face left winking eye','strength':'13','disentanglment':'18','save':'left winking eye'},
+        {'natural':'face', 'target':'face wide eyes','strength':'8','disentanglment':'18','save':'wide eyes'},
+        {'natural':'face', 'target':'face left winking eye','strength':'0','disentanglment':'18','save':'normal eyes'},
 
         ]
 hair7 =[
@@ -69,47 +71,53 @@ hair7 =[
 
         ]
 hair8 =[
-        {'natural':'face', 'target':'face big ears','strength':'3','disentanglment':'9.5','save':'big ears'},
-        {'natural':'face', 'target':'face big ears','strength':'-2','disentanglment':'9.5','save':'small ears'},
-        {'natural':'face', 'target':'face big ears','strength':'0','disentanglment':'9.5','save':'neutral ears'},
+        {'natural':'face', 'target':'face big ears','strength':'3','disentanglment':'19.5','save':'big ears'},
+        {'natural':'face', 'target':'face big ears','strength':'-2','disentanglment':'19.5','save':'small ears'},
+        {'natural':'face', 'target':'face big ears','strength':'0','disentanglment':'19.5','save':'neutral ears'},
 
         ]
 hair9 =[
-        {'natural':'no nose', 'target':'straight nose','strength':'15','disentanglment':'8.6','save':'wide nose'},
-        {'natural':'no nose', 'target':'straight nose','strength':'-15','disentanglment':'8.6','save':'thin nose'},
-        {'natural':'no nose', 'target':'straight nose','strength':'0','disentanglment':'8.5','save':'neutral nose'},
+        {'natural':'face with nose', 'target':'face with big nose','strength':'3','disentanglment':'19.5','save':'wide nose'},
+        {'natural':'face with nose', 'target':'face with big nose','strength':'-3','disentanglment':'19.5','save':'thin nose'},
+        {'natural':'no nose', 'target':'thin nose','strength':'0','disentanglment':'18.5','save':'neutral nose'},
 
         ]
 
+#defined nose
+
+
 hair10 =[
+        {'natural':'face', 'target':'face 50 years old','strength':'5','disentanglment':'18','save':'50 years old'},
         {'natural':'face', 'target':'face 10 years old','strength':'4','disentanglment':'13','save':'10 years old'},
         {'natural':'face', 'target':'face 20 years old','strength':'5','disentanglment':'14','save':'20 years old'},
-        {'natural':'face', 'target':'face 30 years old','strength':'5','disentanglment':'9','save':'30 years old'},
-        {'natural':'face', 'target':'face 40 years old','strength':'5','disentanglment':'8','save':'40 years old'},
-        {'natural':'face', 'target':'face 50 years old','strength':'5','disentanglment':'8','save':'50 years old'},
-        {'natural':'face', 'target':'face 60 years old','strength':'6','disentanglment':'8','save':'60 years old'},
-        {'natural':'face', 'target':'face 70 years old','strength':'8','disentanglment':'8','save':'70 years old'},
+        {'natural':'face', 'target':'face 30 years old','strength':'5','disentanglment':'19','save':'30 years old'},
+        {'natural':'face', 'target':'face 40 years old','strength':'5','disentanglment':'18','save':'40 years old'},
+
+        {'natural':'face', 'target':'face 60 years old','strength':'6','disentanglment':'18','save':'60 years old'},
+        {'natural':'face', 'target':'face 70 years old','strength':'8','disentanglment':'18','save':'70 years old'},
         ]
 
 hair11 =[
-        {'natural':'face', 'target':'happy','strength':'3','disentanglment':'12','save':'happy expression'},
-        {'natural':'face', 'target':'sad','strength':'3','disentanglment':'12','save':'sad expression'},
-        {'natural':'face', 'target':'angry','strength':'3','disentanglment':'12','save':'angry expression'},
-        {'natural':'face', 'target':'shocked','strength':'4','disentanglment':'12','save':'shocked expression'},
-        {'natural':'face', 'target':'scared','strength':'3.5','disentanglment':'12','save':'scared expression'},
-        {'natural':'face', 'target':'disgust','strength':'3','disentanglment':'12','save':'disgust expression'},
-        {'natural':'face', 'target':'neutral','strength':'0','disentanglment':'10','save':'neutral expression'},
+        {'natural':'face', 'target':'happy','strength':'3','disentanglment':'18','save':'happy expression'},
+        {'natural':'face', 'target':'sad','strength':'3','disentanglment':'18','save':'sad expression'},
+        {'natural':'face', 'target':'angry','strength':'3','disentanglment':'18','save':'angry expression'},
+        {'natural':'face', 'target':'shocked','strength':'4','disentanglment':'18','save':'shocked expression'},
+        {'natural':'face', 'target':'scared','strength':'3.5','disentanglment':'18','save':'scared expression'},
+        {'natural':'face', 'target':'disgust','strength':'3','disentanglment':'18','save':'disgust expression'},
+        {'natural':'face', 'target':'neutral','strength':'0','disentanglment':'18','save':'neutral expression'},
         ]
 
-#fat thin
+#add stright white teeth
+
+#fat thi5
 hair12 =[
-        {'natural':'person', 'target':'fat person','strength':'1','disentanglment':'16.4','save':'fat person'},
-        {'natural':'person', 'target':'fat person','strength':'0.5','disentanglment':'16.4','save':'more overwieght person'},
-        {'natural':'person', 'target':'fat person','strength':'0.2','disentanglment':'16.4','save':'overwieght person'},
-        {'natural':'person', 'target':'fat person','strength':'0','disentanglment':'16.4','save':'neutral weight person'},
-        {'natural':'person', 'target':'fat person','strength':'-0.2','disentanglment':'16.4','save':'underwieght person'},
-        {'natural':'person', 'target':'fat person','strength':'-0.5','disentanglment':'16.4','save':'more underwieght person'},
-        {'natural':'person', 'target':'fat person','strength':'-1.3','disentanglment':'10','save':'skinny person'},
+        {'natural':'person', 'target':'fat person','strength':'5','disentanglment':'18.4','save':'fat person'},
+        {'natural':'person', 'target':'fat person','strength':'4.5','disentanglment':'18.4','save':'more overwieght person'},
+        {'natural':'person', 'target':'fat person','strength':'4.2','disentanglment':'18.4','save':'overwieght person'},
+        {'natural':'person', 'target':'fat person','strength':'0','disentanglment':'18.4','save':'neutral weight person'},
+        {'natural':'person', 'target':'fat person','strength':'-4.2','disentanglment':'18.4','save':'underwieght person'},
+        {'natural':'person', 'target':'fat person','strength':'-4.5','disentanglment':'18.4','save':'more underwieght person'},
+        {'natural':'person', 'target':'fat person','strength':'-5.3','disentanglment':'18.4','save':'skinny person'},
         ]
 
 #by either creating a 0 strength prompt or saving code using init of default starting image and add at first node

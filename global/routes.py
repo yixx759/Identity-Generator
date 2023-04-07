@@ -108,11 +108,11 @@ def dataset():
     saveloc = request.args.get('save')
     print(text)
     master.text_n(text2)
-    img2 = master.ChangeAlpha(num1)
-    img2 = master.ChangeBeta(num2)
+
     img2, tmp = master.text_t(text)
     #take arr and add the results ontop of eachother caoncatanate then display to see full proggression
-
+    img2 = master.ChangeAlpha(num1)
+    img2 = master.ChangeBeta(num2)
     master.SetInit()
     arr.append(tmp)
 
@@ -134,10 +134,11 @@ def initdataset():
     saveloc = request.args.get('save')
     print(text)
     master.text_n(text2)
-    img2 = master.ChangeAlpha(num1)
-    img2 = master.ChangeBeta(num2)
+
     img2, tmp = master.text_t(text)
     #take arr and add the results ontop of eachother caoncatanate then display to see full proggression
+    img2 = master.ChangeAlpha(num1)
+    img2 = master.ChangeBeta(num2)
 
     master.SetInit()
     arr.append(tmp)
@@ -215,9 +216,10 @@ def ChangeIdentityPerm():
     saveloc = request.args.get('save')
     print(text)
     master.text_n(text2)
+
+    img2, _ = master.text_t(text)
     img2 = master.ChangeAlpha(num1)
     img2 = master.ChangeBeta(num2)
-    img2, _ = master.text_t(text)
     #take arr and add the results ontop of eachother caoncatanate then display to see full proggression
     master.ident.append(master.SetInit())
 

@@ -98,6 +98,7 @@ class PlayInteractively():  #Controller
         img=Image.fromarray(img)
         #img = ImageTk.PhotoImage(img)
         self.addImage_m(img)
+        return img
 
     def ChangeDataset(self,event):
         
