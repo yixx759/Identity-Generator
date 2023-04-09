@@ -40,12 +40,12 @@ hair3 =[
         ]
 
 hair4 =[
-        {'natural':'face without facial hair', 'target':'face with with beard','strength':'13','disentanglment':'22','save':'beard'},
-        {'natural':'face without facial hair', 'target':'face with with beard','strength':'10','disentanglment':'22','save':'strong facial hair'},
-        {'natural':'face without facial hair', 'target':'face with with beard','strength':'8','disentanglment':'22','save':'medium facial hair'},
-        {'natural':'face without facial hair', 'target':'face with with beard','strength':'7.5','disentanglment':'22','save':'light facial hair'},
-        {'natural':'face without facial hair', 'target':'face with with beard','strength':'7','disentanglment':'22','save':'very light facial hair'},
-        {'natural':'face without facial hair', 'target':'face with with beard','strength':'0','disentanglment':'22','save':'no facial hair'},
+        {'natural':'face', 'target':'facial hair','strength':'15','disentanglment':'16','save':'beard'},
+        {'natural':'face', 'target':'facial hair','strength':'12','disentanglment':'16','save':'strong facial hair'},
+        {'natural':'face', 'target':'facial hair','strength':'9','disentanglment':'16','save':'medium facial hair'},
+        {'natural':'face', 'target':'facial hair','strength':'7.5','disentanglment':'16','save':'light facial hair'},
+        {'natural':'face', 'target':'facial hair','strength':'6','disentanglment':'16','save':'very light facial hair'},
+        {'natural':'face', 'target':'facial hair','strength':'0','disentanglment':'16','save':'no facial hair'},
         {'natural':'face', 'target':'face with stubble','strength':'6','disentanglment':'11','save':'stubble'},
         {'natural':'face', 'target':'face with stubble','strength':'9','disentanglment':'11','save':'heavy stubble'},
         ]
@@ -122,7 +122,7 @@ hair12 =[
 
 #glasses and sunglassses
 hair13 = [
-        {'natural':'face', 'target':'earings','strength':'5','disentanglment':'12.4','save':'earings'},
+        {'natural':'face', 'target':'earings','strength':'7','disentanglment':'10.4','save':'earings'},
         {'natural':'face', 'target':'earings','strength':'0','disentanglment':'18.4','save':'no earings'},
         {'natural':'face', 'target':'face with glasses','strength':'6.47','disentanglment':'14.8','save':'glasses'},
 
