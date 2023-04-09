@@ -39,7 +39,7 @@ for i in range(Testgroup):
 params2 = [{'natural':'person with clothes ', 'target':'person with white shirt','strength':'4','disentanglment':'11','save':'2'},
 
 {'natural':'face with hair', 'target':'face without hair','strength':'9.52','disentanglment':'15.9','save':'2'},
-{'natural':'face with hair', 'target':'face without hair','strength':'2','disentanglment':'19.3','save':'2'},
+{'natural':'face with hair', 'target':'face without hair','strength':'3','disentanglment':'17.3','save':'2'},
     {'natural':'person ', 'target':'person with beard','strength':'-2','disentanglment':'9','save':'2'},
     {'natural':'person ', 'target':'person with beard','strength':'-2','disentanglment':'11','save':'2'},
 
@@ -52,7 +52,7 @@ params2 = [{'natural':'person with clothes ', 'target':'person with white shirt'
 {'natural':'person', 'target':'person  smiling','strength':'-3','disentanglment':'13','save':'7'},
 {'natural':'person open mouth', 'target':'person  closed mouth','strength':'2','disentanglment':'10','save':'2'},
 {'natural':'child', 'target':'adult','strength':'2','disentanglment':'15','save':'2'},
-{'natural':'brown eyes', 'target':'blue eyes','strength':'-7','disentanglment':'20','save':'2'},
+{'natural':'brown eyes', 'target':'blue eyes','strength':'-6','disentanglment':'17','save':'2'},
 {'natural':'busy background', 'target':'simple background','strength':'3.619','disentanglment':'10','save':'2'},
 {'natural':'colored background', 'target':'white background','strength':'2.65','disentanglment':'15','save':'2'}]
 

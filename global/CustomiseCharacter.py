@@ -111,13 +111,13 @@ hair11 =[
 
 #fat thi5
 hair12 =[
-        {'natural':'person', 'target':'fat person','strength':'5','disentanglment':'18.4','save':'fat person'},
-        {'natural':'person', 'target':'fat person','strength':'4.5','disentanglment':'18.4','save':'more overwieght person'},
-        {'natural':'person', 'target':'fat person','strength':'4.2','disentanglment':'18.4','save':'overwieght person'},
-        {'natural':'person', 'target':'fat person','strength':'0','disentanglment':'18.4','save':'neutral weight person'},
-        {'natural':'person', 'target':'fat person','strength':'-4.2','disentanglment':'18.4','save':'underwieght person'},
-        {'natural':'person', 'target':'fat person','strength':'-4.5','disentanglment':'18.4','save':'more underwieght person'},
-        {'natural':'person', 'target':'fat person','strength':'-5.3','disentanglment':'18.4','save':'skinny person'},
+        {'natural':'person', 'target':'fat person','strength':'1.5','disentanglment':'19.3','save':'fat person'},
+        {'natural':'person', 'target':'fat person','strength':'0.5','disentanglment':'19.3','save':'more overwieght person'},
+        {'natural':'person', 'target':'fat person','strength':'0.25','disentanglment':'19.3','save':'overwieght person'},
+        {'natural':'person', 'target':'fat person','strength':'0','disentanglment':'19.3','save':'neutral weight person'},
+        {'natural':'person', 'target':'fat person','strength':'-0.25','disentanglment':'19.3','save':'underwieght person'},
+        {'natural':'person', 'target':'fat person','strength':'-0.75','disentanglment':'19.3','save':'more underwieght person'},
+        {'natural':'person', 'target':'fat person','strength':'-1','disentanglment':'19.3','save':'skinny person'},
         ]
 
 #glasses and sunglassses
