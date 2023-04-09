@@ -36,25 +36,27 @@ for i in range(Testgroup):
 
 
 
-params2 = [{'natural':'person with clothes ', 'target':'person with white shirt','strength':'4','disentanglment':'10','save':'2'},
+params2 = [{'natural':'person with clothes ', 'target':'person with white shirt','strength':'4','disentanglment':'11','save':'2'},
 
-{'natural':'face with hair', 'target':'face without hair','strength':'6.52','disentanglment':'13.9','save':'2'},
-{'natural':'face with hair', 'target':'face without hair','strength':'8','disentanglment':'20.9','save':'2'},
-    {'natural':'person ', 'target':'person with beard','strength':'-1','disentanglment':'9','save':'2'},
-{'natural':'person ', 'target':'person clean shaven','strength':'-2','disentanglment':'8','save':'2'},
-    {'natural':'Makeup', 'target':'no makeup','strength':'3','disentanglment':'3','save':'4'},
+{'natural':'face with hair', 'target':'face without hair','strength':'9.52','disentanglment':'15.9','save':'2'},
+{'natural':'face with hair', 'target':'face without hair','strength':'2','disentanglment':'19.3','save':'2'},
+    {'natural':'person ', 'target':'person with beard','strength':'-2','disentanglment':'9','save':'2'},
+    {'natural':'person ', 'target':'person with beard','strength':'-2','disentanglment':'11','save':'2'},
 
-{'natural':'Person with glasses', 'target':'Person with no glasses','strength':'5','disentanglment':'11','save':'2'},
-{'natural':'Person with glasses', 'target':'Person with no glasses','strength':'3','disentanglment':'11','save':'2'},
- {'natural':'overweight person', 'target':'skinny person ','strength':'1','disentanglment':'9','save':'2'},
-{'natural':'hair', 'target':'tidy dark hair ','strength':'3','disentanglment':'13','save':'2'},
-{'natural':'person', 'target':'person  smiling','strength':'-3','disentanglment':'10','save':'7'},
+    {'natural':'Makeup', 'target':'no makeup','strength':'3','disentanglment':'13','save':'4'},
+
+{'natural':'Person with glasses', 'target':'Person with no glasses','strength':'5','disentanglment':'13','save':'2'},
+{'natural':'Person with glasses', 'target':'Person with no glasses','strength':'3','disentanglment':'14','save':'2'},
+ #{'natural':'overweight person', 'target':'skinny person ','strength':'1','disentanglment':'19','save':'2'},
+{'natural':'hair', 'target':'tidy dark hair ','strength':'3','disentanglment':'17','save':'2'},
+{'natural':'person', 'target':'person  smiling','strength':'-3','disentanglment':'13','save':'7'},
 {'natural':'person open mouth', 'target':'person  closed mouth','strength':'2','disentanglment':'10','save':'2'},
-{'natural':'child', 'target':'adult','strength':'2','disentanglment':'5','save':'2'},
+{'natural':'child', 'target':'adult','strength':'2','disentanglment':'15','save':'2'},
+{'natural':'brown eyes', 'target':'blue eyes','strength':'-7','disentanglment':'20','save':'2'},
 {'natural':'busy background', 'target':'simple background','strength':'3.619','disentanglment':'10','save':'2'},
-{'natural':'colored background', 'target':'white background','strength':'2.65','disentanglment':'10','save':'2'}]
+{'natural':'colored background', 'target':'white background','strength':'2.65','disentanglment':'15','save':'2'}]
 
-parmas3 = {'natural':'face side view', 'target':'face front view','strength':'20','disentanglment':'7','save':'2'}
+parmas3 = {'natural':'face side view', 'target':'face front view','strength':'25','disentanglment':'8','save':'2'}
 #parmas3 = {'natural':'face with hair', 'target':'face with long hair','strength':'20','disentanglment':'8.6','save':'2'}
 #face front view  20 8.6
 
@@ -74,7 +76,7 @@ for i2 in range(Testgroup):
     requests.get(url2)
     requests.get(url3)
     parmas3['save'] = "F:/Challenges/StyleCLIP/global/Dataset/Photos/"+str(i2)
-    for i in range(3):
+    for i in range(2):
         r = requests.get(url5, params=parmas3)
 
     getnewlatent(filenamel, photofile)

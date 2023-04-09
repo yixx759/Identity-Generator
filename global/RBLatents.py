@@ -7,7 +7,7 @@ from GetLatent import main as getlatent
 
 
 testgroup = 10
-promptcount = 15
+promptcount = 14
 
 subprocess.Popen("start Activate.bat", shell=True)
 
