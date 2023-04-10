@@ -177,6 +177,28 @@ class Identity():
             newprev = previous + str(self.ident)
             self.next.testprint(newprev)
 
+    def matchfinder(self, target:str, filenames, path = None):
+        if (path == None):
+                path = self.IdentityPath
+        print('\n\nentred loop')
+        #loop through input list and through file structure to find match
+        print(os.listdir(path))
+        for files in os.listdir(path):
+            filepath = os.path.join(path, files)
+            if (os.path.isdir(filepath)):
+                print("\n\nFolder path")
+                print(filepath)
+                filenames = self.matchfinder(target,filenames, filepath)
+                print('exited')
+
+            if (files.endswith(".jpg") and files == target+".jpg"):
+                print("\n\nImage path")
+                print(filepath)
+                filenames.append(filepath)
+
+        return filenames
+
+
     def callprompts(self, promlist = []):
         identcopy = deepcopy(self.ident)
         #
@@ -288,6 +310,7 @@ for i in range(testgroup):
     #check if codes is only thing needed
     # deep copy before prompts sending in as well
     # hairtemp = deepcopy hair if way to avoid find in class
+
     master = Identity(hairpath,deepcopy(hair), None, None)
 
     master.add(deepcopy(hair2))
