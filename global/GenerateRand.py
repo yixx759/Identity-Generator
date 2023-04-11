@@ -39,7 +39,7 @@ if __name__ == "__main__":
     mainhere("./data/ffhq","./data/ffhq/latents.pt","0.jpg")
 
 
-    ex = Namespace(real=True, dataset_name="ffhq")
+    ex = Namespace(real=True, dataset_name="ffhq", Loadtype = 1)
     GetGUIData.main(ex)
 
 

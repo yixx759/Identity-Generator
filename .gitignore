@@ -11,5 +11,5 @@
 /global/stylegan2-ffhq-config-f.pt
 /global/data/**
 /optimization/stylegan2-ffhq-config-f.pt
-/Interpalator tool/Images/**
+/Interpalator_tool/Images/**
 /global/Celebrities/**
