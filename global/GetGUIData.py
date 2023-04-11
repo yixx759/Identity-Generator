@@ -97,7 +97,7 @@ def main(ags):
         for i in range(len(out)):
             img = out[i, 0]
             img = Image.fromarray(img)
-            img.save(ags.IdentityPath+ '/0' + '.jpg')
+            img.save(ags.IdentityPath+ '/1' + '.jpg')
 
 
 

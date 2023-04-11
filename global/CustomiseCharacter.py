@@ -177,7 +177,7 @@ class Identity():
             newprev = previous + str(self.ident)
             self.next.testprint(newprev)
 
-    def matchfinder(self, target:str, filenames, path = None):
+    def matchfinder(self, target:str, filenames = [], path = None):
         if (path == None):
                 path = self.IdentityPath
         print('\n\nentred loop')
@@ -215,7 +215,13 @@ class Identity():
             if not os.path.exists(self.IdentityPath):
                 os.makedirs(self.IdentityPath)
 
-        if self.last == True:
+        if self.last == True and self.first == True:
+            for num, identitys in enumerate(self.ident):
+                self.ident[num]['save']= self.IdentityPath + '/' + self.ident[num]['save']
+                r = requests.get(Changeurl, params=identitys)
+
+
+        elif self.last == True:
             for num, identitys in enumerate(self.ident):
                 print("Entred")
                 self.ident[num]['save'] = promlist[len(promlist) - 1]['save'] + '/' + self.ident[num]['save']
@@ -313,19 +319,19 @@ for i in range(testgroup):
 
     master = Identity(hairpath,deepcopy(hair), None, None)
 
-    #master.add(deepcopy(hair2))
-    # master.add(deepcopy(hair3))
+    master.add(deepcopy(hair2))
+    master.add(deepcopy(hair3))
 
-    # master.add(deepcopy(hair5))
-    # master.add(deepcopy(hair6))
-    # master.add(deepcopy(hair7))
-    # master.add(deepcopy(hair8))
-    # master.add(deepcopy(hair9))
-    # master.add(deepcopy(hair10))
-    # master.add(deepcopy(hair11))
-    # master.add(deepcopy(hair12))
-    # master.add(deepcopy(hair13))
-    # master.add(deepcopy(hair4))
+    master.add(deepcopy(hair5))
+    master.add(deepcopy(hair6))
+    master.add(deepcopy(hair7))
+    master.add(deepcopy(hair8))
+    master.add(deepcopy(hair9))
+    master.add(deepcopy(hair10))
+    master.add(deepcopy(hair11))
+    master.add(deepcopy(hair12))
+    master.add(deepcopy(hair13))
+    master.add(deepcopy(hair4))
 
     master.callprompts()
 

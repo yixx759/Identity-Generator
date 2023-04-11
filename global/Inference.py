@@ -53,7 +53,7 @@ class StyleCLIP():
         elif newnorm == loadtype.Customident:
             w_plus = np.load('./CustomIdentities/Identity' + str(num) +'/BaseIdentity/w_plus.npy')
         elif newnorm == loadtype.Truecustom:
-            w_plus = np.load(place)
+            w_plus = np.load(place+"/w_plus.npy")
 
         self.M.dlatents=M.W2S(w_plus)
 
