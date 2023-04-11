@@ -1,6 +1,6 @@
 from GenerateRand import mainhere
 import requests
-import GetGUIDataDataset
+import GetGUIData
 from argparse import Namespace
 import os
 import tensorflow as tf
@@ -66,10 +66,10 @@ url4= "http://localhost:5000/close"
 for i2 in range(Testgroup):
     filenamel = "F:\Challenges\StyleCLIP\global\Dataset\Latents\Latent"+str(i2)+".pt"
     photofile = "F:/Challenges/StyleCLIP/global/Dataset/Photos/"+str(i2) +".jpg"
-    ex = Namespace(real=True, dataset_name="ffhq", LatentNum=str(i2))
-    GetGUIDataDataset.main(ex)
+    ex = Namespace(real=True, dataset_name="ffhq", LatentNum=str(i2), Loadtype=2)
+    GetGUIData.main(ex)
     getnewlatent(filenamel,photofile)
-    GetGUIDataDataset.main(ex)
+    GetGUIData.main(ex)
     url2 = "http://localhost:5000/change/"+str(i2)
     url3 = "http://localhost:5000/changer/" + str(i2)
 
@@ -80,7 +80,7 @@ for i2 in range(Testgroup):
         r = requests.get(url5, params=parmas3)
 
     getnewlatent(filenamel, photofile)
-    GetGUIDataDataset.main(ex)
+    GetGUIData.main(ex)
     for i in range(len(params2)):
         params2[i]['save'] = str(i+1)
         #params2[i]['save'] = "Dataset Tester"+ str(i2)+"/"+params2[i]['save']

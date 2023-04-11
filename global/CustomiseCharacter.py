@@ -2,7 +2,7 @@ import os
 import shutil
 from argparse import Namespace
 import requests
-from GetGUIDataNewIdentity import main as GetGUIData
+from GetGUIData import main as GetGUIData
 from copy import deepcopy
 import tensorflow as tf
 
@@ -301,7 +301,7 @@ for i in range(testgroup):
          os.makedirs(basepath)
 
     shutil.copy("./static/Dataset Tester"+str(i)+"/finallatent.pt",basepath+"/latents.pt")
-    ex = Namespace(real=True, dataset_name="ffhq", IdentityNum=str(i+1))
+    ex = Namespace(real=True, dataset_name="ffhq", IdentityNum=str(i+1), Loadtype=3)
     GetGUIData(ex)
 #    print("using this")
     requests.get(changelatent)
@@ -313,19 +313,19 @@ for i in range(testgroup):
 
     master = Identity(hairpath,deepcopy(hair), None, None)
 
-    master.add(deepcopy(hair2))
-    master.add(deepcopy(hair3))
+    #master.add(deepcopy(hair2))
+    # master.add(deepcopy(hair3))
 
-    master.add(deepcopy(hair5))
-    master.add(deepcopy(hair6))
-    master.add(deepcopy(hair7))
-    master.add(deepcopy(hair8))
-    master.add(deepcopy(hair9))
-    master.add(deepcopy(hair10))
-    master.add(deepcopy(hair11))
-    master.add(deepcopy(hair12))
-    master.add(deepcopy(hair13))
-    master.add(deepcopy(hair4))
+    # master.add(deepcopy(hair5))
+    # master.add(deepcopy(hair6))
+    # master.add(deepcopy(hair7))
+    # master.add(deepcopy(hair8))
+    # master.add(deepcopy(hair9))
+    # master.add(deepcopy(hair10))
+    # master.add(deepcopy(hair11))
+    # master.add(deepcopy(hair12))
+    # master.add(deepcopy(hair13))
+    # master.add(deepcopy(hair4))
 
     master.callprompts()
 

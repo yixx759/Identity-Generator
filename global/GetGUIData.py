@@ -5,10 +5,16 @@ import argparse
 from manipulate import Manipulator
 import torch
 from PIL import Image
+from Inference import loadtype
 #%%
 
 
 def main(ags):
+    if (ags.Loadtype == None):
+        loader = loadtype.Play
+    else:
+        loader = loadtype(ags.Loadtype)
+
     dataset_name = ags.dataset_name
 
     if not os.path.isdir('./data/' + dataset_name):
@@ -25,15 +31,35 @@ def main(ags):
             os.remove('./data/' + dataset_name + '/' + name)
 
     # %%
+
     if ags.real:
-        latents = torch.load('./data/' + dataset_name + '/latents.pt')
+        if(loader == loadtype.Play):
+
+            latents = torch.load('./data/' + dataset_name + '/latents.pt')
+        elif(loader == loadtype.DataNorm):
+            latents = torch.load('./Dataset/Latents/Latent' + ags.LatentNum + '.pt')
+        elif(loader == loadtype.Customident):
+            latents = torch.load('./CustomIdentities/Identity' + ags.IdentityNum + '/BaseIdentity/latents.pt')
+        elif(loader == loadtype.Truecustom):
+            latents = torch.load(ags.IdentityPath+"/latents.pt")
+
         w_plus = latents.cpu().detach().numpy()
+
     else:
         w = np.load('./npy/' + dataset_name + '/W.npy')
         tmp = w[:50]  # only use 50 images
         tmp = tmp[:, None, :]
         w_plus = np.tile(tmp, (1, M.Gs.components.synthesis.input_shape[1], 1))
-    np.save('./data/' + dataset_name + '/w_plus.npy', w_plus)
+    if (loader == loadtype.Play):
+
+        np.save('./data/' + dataset_name + '/w_plus.npy', w_plus)
+    elif (loader == loadtype.DataNorm):
+        np.save('./Dataset/W_plus/w_plus'+ags.LatentNum+'.npy', w_plus)
+    elif (loader == loadtype.Customident):
+        np.save('./CustomIdentities/Identity'+ags.IdentityNum+'/BaseIdentity/w_plus.npy', w_plus)
+    elif (loader == loadtype.Truecustom):
+        np.save(ags.IdentityPath+"/w_plus.npy", w_plus)
+
 
     # %%
     tmp = M.W2S(w_plus)
@@ -48,13 +74,35 @@ def main(ags):
     M.manipulate_layers = [lindex]
     codes, out = M.EditOneC(bname)
     # %%
+    if (loader == loadtype.Play):
 
-    for i in range(len(out)):
-        img = out[i, 0]
-        img = Image.fromarray(img)
-        img.save('./data/' + dataset_name + '/' + str(i) + '.jpg')
+        for i in range(len(out)):
+            img = out[i, 0]
+            img = Image.fromarray(img)
+            img.save('./data/' + dataset_name + '/' + str(i) + '.jpg')
+
+    elif (loader == loadtype.DataNorm):
+        for i in range(len(out)):
+            img = out[i, 0]
+            img = Image.fromarray(img)
+            img.save('./Dataset/Photos/' + ags.LatentNum + '.jpg')
+
+    elif (loader == loadtype.Customident):
+        for i in range(len(out)):
+            img = out[i, 0]
+            img = Image.fromarray(img)
+            img.save('./CustomIdentities/Identity'+ags.IdentityNum+'/BaseIdentity/0.jpg')
+
+    elif (loader == loadtype.Truecustom):
+        for i in range(len(out)):
+            img = out[i, 0]
+            img = Image.fromarray(img)
+            img.save(ags.IdentityPath+ '/0' + '.jpg')
+
+
+
     # %%
-
+    M.closesession()
 
 
 if __name__ == "__main__":

@@ -47,11 +47,11 @@ def changephoto(num):
 
 @app.route('/changer/<int:num>')
 def changelatent(num):
-    master.changeLatent(num, 2)
+    master.changeLatent("",num, 2)
 
 @app.route('/changerIdent/<int:num>')
 def changeIdentity(num):
-    master.changeLatent(num, 3)
+    master.changeLatent('',num, 3)
 
 @app.route('/changerTrue/<string:path>')
 def changeTrue(path):
