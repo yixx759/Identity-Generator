@@ -1,12 +1,18 @@
-
+import enum
 from manipulate import Manipulator
 import tensorflow as tf
 import numpy as np 
 import torch
 import clip
 from MapTS import GetBoundary,GetDt
-from argparse import Namespace
-import gc
+
+
+class loadtype(enum.Enum):
+    Play = 1
+    DataNorm = 2
+    Customident = 3
+    Truecustom = 4
+
 
 class StyleCLIP():
     
@@ -17,6 +23,7 @@ class StyleCLIP():
         self.LoadData(dataset_name)
 
 
+
     def reset(self):
         tf.keras.backend.clear_session()
 
@@ -24,7 +31,9 @@ class StyleCLIP():
         self.M.closesession()
 
 
-    def LoadData(self, dataset_name,num=0, norm = True):
+    def LoadData(self, dataset_name, place = "", num=0, norm = 1):
+        newnorm = loadtype(norm)
+
         tf.keras.backend.clear_session()
 
         M=Manipulator(dataset_name=dataset_name)
@@ -35,15 +44,16 @@ class StyleCLIP():
         self.M=M
         self.fs3=fs3
 
-        if norm:
+        if newnorm == loadtype.Play:
 
             w_plus=np.load('./data/'+dataset_name+'/w_plus.npy')
 
-
-            #w_plus = np.load('./Dataset/W_plus/w_plus'+ str(num)+'.npy')
-        else:
+        elif newnorm == loadtype.DataNorm:
+            w_plus = np.load('./Dataset/W_plus/w_plus'+ str(num)+'.npy')
+        elif newnorm == loadtype.Customident:
             w_plus = np.load('./CustomIdentities/Identity' + str(num) +'/BaseIdentity/w_plus.npy')
-
+        elif newnorm == loadtype.Truecustom:
+            w_plus = np.load(place)
 
         self.M.dlatents=M.W2S(w_plus)
 

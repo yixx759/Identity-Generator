@@ -2,7 +2,7 @@ from PIL import Image
 from flask import Flask, request,render_template
 import Auto3
 import numpy as np
-
+from Inference import loadtype
 
 
 app = Flask(__name__)
@@ -47,11 +47,15 @@ def changephoto(num):
 
 @app.route('/changer/<int:num>')
 def changelatent(num):
-    master.changeLatent(num)
+    master.changeLatent(num, 2)
 
 @app.route('/changerIdent/<int:num>')
 def changeIdentity(num):
-    master.changeLatent(num,False)
+    master.changeLatent(num, 3)
+
+@app.route('/changerTrue/<string:path>')
+def changeTrue(path):
+    master.changeLatent(path,0, 4)
 
 
 

@@ -7,7 +7,7 @@ from tkinter.filedialog import askopenfilename
 #from GUI import View
 from GUI import View
 #from Inference import StyleCLIP
-from Inference import StyleCLIP
+from Inference import StyleCLIP, loadtype
 import argparse
 #%%
 
@@ -62,8 +62,8 @@ class PlayInteractively():  #Controller
         img = ImageTk.PhotoImage(img)
         self.addImage_m(img)
         
-    def changeLatent(self, num, norm=True):
-        self.style_clip.LoadData('ffhq',num,norm)
+    def changeLatent(self, path ="" ,num = 0, norm=1):
+        self.style_clip.LoadData('ffhq',path,num,norm)
 
 
     #save with default saver prompt and give
