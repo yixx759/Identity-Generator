@@ -53,8 +53,11 @@ def changelatent(num):
 def changeIdentity(num):
     master.changeLatent('',num, 3)
 
-@app.route('/changerTrue/<string:path>')
+@app.route('/changerTrue/<path:path>')
 def changeTrue(path):
+    print('\n\n\n')
+    print('\n\n\nlabel')
+    print(path)
     master.changeLatent(path,0, 4)
 
 

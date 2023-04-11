@@ -71,8 +71,10 @@ def main(namelist):
           requests.get(changelatent)
 
           expressPath = path + "/baseExpressions"
+          print("\n\n\n\n\n\nHEEEEEEEEEEEEEEEERRRRRRRRRRRRRRREEEEEEEEEE\n\n\n\n\n\n\n\n")
           master = Identity(expressPath,deepcopy(express1),None,None )
           master.add(deepcopy(express2))
+          master.callprompts()
           list1 = master.matchfinder("closed eyes")
           list2 = master.matchfinder("normal eyes")
           print(list1)
