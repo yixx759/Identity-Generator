@@ -7,7 +7,7 @@ def main(start, end,savename):
 
     def makegif(frames):
         frameone = frames[0]
-        frameone.save(savename+".gif", format="GIF", append_images = frames, save_all=True ,duration = 100)
+        frameone.save(savename+".gif", format="GIF", append_images = frames, save_all=True ,duration = 100, quality = 50, optimize = True )
 
     def lerp(pix, pix2, interp):
         newarray = pix[:] + (pix2[:] - pix[:])*interp

@@ -18,7 +18,7 @@ def main(saveloc, imgeloc, dest = None):
     for names in files:
         os.remove("//wsl.localhost/Ubuntu-20.04/home/m/encoder4editing/imagefrom/"+names)
     #//wsl.localhost/Ubuntu-20.04/home/m/encoder4editing/imagefrom
-    shutil.move(imgeloc, "//wsl.localhost/Ubuntu-20.04/home/m/encoder4editing/imagefrom/")
+    shutil.copy(imgeloc, "//wsl.localhost/Ubuntu-20.04/home/m/encoder4editing/imagefrom/")
     os.system('wsl ~ -e sh -c ". ~/miniconda3/etc/profile.d/conda.sh; conda activate e4e_env;  cd encoder4editing; ~/miniconda3/envs/e4e_env/bin/python scripts/inference.py --align --images_dir=imagefrom --save_dir=output check/e4e_ffhq_encode.pt"')
     #os.rename(source,newsource )
     shutil.move(source, saveloc)

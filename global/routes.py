@@ -37,7 +37,7 @@ def serve_pil_image3(pil_img,saveto):
     #
 def serve_pil_image4(pil_img,saveto):
     print("here!!!!!!!!!!!!!!!")
-    pil_img.save(saveto+'.jpg', compression='jpeg')
+    pil_img.save(saveto+'.jpg', compression='jpeg', quality=78, optimize = True)
     #img1 = Image.open('./data/ffhq/0.jpg')
     #img1.save('./static/0.JPG', 'JPEG')
 

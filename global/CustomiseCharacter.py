@@ -249,8 +249,8 @@ def main():
     hair6 = [
         {'natural': 'face', 'target': 'face shut eyes', 'strength': '6.28', 'disentanglment': '10',
          'save': 'closed eyes'},
-        {'natural': 'face', 'target': 'face left winking eye', 'strength': '13', 'disentanglment': '10',
-         'save': 'left winking eye'},
+        #{'natural': 'face', 'target': 'face left winking eye', 'strength': '13', 'disentanglment': '10',
+         #'save': 'left winking eye'},
         {'natural': 'face', 'target': 'face wide eyes', 'strength': '8', 'disentanglment': '10', 'save': 'wide eyes'},
         {'natural': 'face', 'target': 'face left winking eye', 'strength': '0', 'disentanglment': '10',
          'save': 'normal eyes'},
@@ -331,7 +331,7 @@ def main():
     # glasses and sunglassses
     hair13 = [
         {'natural': 'face', 'target': 'earings', 'strength': '7', 'disentanglment': '10.4', 'save': 'earings'},
-        {'natural': 'face', 'target': 'earings', 'strength': '0', 'disentanglment': '18.4', 'save': 'no earings'},
+        {'natural': 'face', 'target': 'earings', 'strength': '0', 'disentanglment': '10.4', 'save': 'no earings'},
         {'natural': 'face', 'target': 'face with glasses', 'strength': '6.47', 'disentanglment': '14.8',
          'save': 'glasses'},
 

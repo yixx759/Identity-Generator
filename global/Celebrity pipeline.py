@@ -26,6 +26,45 @@ express2 =[
 
         ]
 
+express3 = [
+        {'natural': 'face', 'target': 'earings', 'strength': '11', 'disentanglment': '12.4', 'save': 'earings'},
+        {'natural': 'face', 'target': 'earings', 'strength': '0', 'disentanglment': '10.4', 'save': 'no earings'},
+        {'natural': 'face', 'target': 'face with glasses', 'strength': '6.47', 'disentanglment': '14.8',
+         'save': 'glasses'},
+]
+
+express4 = [{'natural': 'face with hair', 'target': 'face with brown hair', 'strength': '3', 'disentanglment': '14',
+              'save': 'brown'},
+             {'natural': 'face with hair', 'target': 'face with blonde hair', 'strength': '2', 'disentanglment': '14',
+              'save': 'blonde'},
+             {'natural': 'face with hair', 'target': 'face with grey hair', 'strength': '3', 'disentanglment': '14',
+              'save': 'grey'},
+             {'natural': 'face with hair', 'target': 'face with white hair', 'strength': '5', 'disentanglment': '14',
+              'save': 'white'},
+             {'natural': 'face with hair', 'target': 'face with red hair', 'strength': '3', 'disentanglment': '14',
+              'save': 'red'},
+             {'natural': 'face with hair', 'target': 'face with ginger hair', 'strength': '5', 'disentanglment': '14',
+              'save': 'ginger'},
+
+             ]
+
+express5 = [
+        {'natural': 'person', 'target': 'fat person', 'strength': '1.5', 'disentanglment': '19.3',
+         'save': 'fat person'},
+        {'natural': 'person', 'target': 'fat person', 'strength': '0.5', 'disentanglment': '19.3',
+         'save': 'more overwieght person'},
+        {'natural': 'person', 'target': 'fat person', 'strength': '0.25', 'disentanglment': '19.3',
+         'save': 'overwieght person'},
+        {'natural': 'person', 'target': 'fat person', 'strength': '0', 'disentanglment': '19.3',
+         'save': 'neutral weight person'},
+        {'natural': 'person', 'target': 'fat person', 'strength': '-0.25', 'disentanglment': '19.3',
+         'save': 'underwieght person'},
+        {'natural': 'person', 'target': 'fat person', 'strength': '-0.75', 'disentanglment': '19.3',
+         'save': 'more underwieght person'},
+        {'natural': 'person', 'target': 'fat person', 'strength': '-1', 'disentanglment': '19.3',
+         'save': 'skinny person'},
+    ]
+
 
 def createFiles(list):
 
@@ -72,18 +111,13 @@ def main(namelist):
 
         expressPath = path + "/baseExpressions"
         print("\n\n\n\n\n\nHEEEEEEEEEEEEEEEERRRRRRRRRRRRRRREEEEEEEEEE\n\n\n\n\n\n\n\n")
-        master = Identity(expressPath,deepcopy(express1),None,None )
+        master = Identity(expressPath,deepcopy(express5),None,None )
+        master.add(deepcopy(express4))
+        master.add(deepcopy(express1))
         master.add(deepcopy(express2))
         master.callprompts()
-        list1 = master.matchfinder("closed eyes",[])
-        list2 = master.matchfinder("normal eyes", [])
-        print(list1)
-        print(list2)
-        for i in range(len(list2)):
-            getpath = os.path.dirname(list1[i])
-            print(getpath)
-            GetGif(list2[i],list1[i], getpath+"/blink")
-            GetGif(list1[i],list2[i], getpath+"/open")
+
+
 
 
 
@@ -91,6 +125,6 @@ def main(namelist):
 
 
 if __name__ == "__main__":
-     CelebName = ["Kanye", "Taylor", "GAGA"]
+     CelebName = ["Kanye","Taylor", "GAGA"]
      #createFiles(CelebName)
      main(CelebName)
