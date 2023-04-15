@@ -6,7 +6,7 @@ from GetGUIData import main as GetGUIData
 from GetLatent import main as GetLatent
 from CustomiseCharacter import Identity
 from copy import deepcopy
-from Interpalator_tool.Interp import main as GetGif
+
 
 express1 =[
         {'natural':'face', 'target':'happy','strength':'3','disentanglment':'10','save':'happy expression'},
@@ -33,17 +33,17 @@ express3 = [
          'save': 'glasses'},
 ]
 
-express4 = [{'natural': 'face with hair', 'target': 'face with brown hair', 'strength': '3', 'disentanglment': '14',
+express4 = [{'natural': 'face with hair', 'target': 'face with brown hair', 'strength': '7', 'disentanglment': '13',
               'save': 'brown'},
-             {'natural': 'face with hair', 'target': 'face with blonde hair', 'strength': '2', 'disentanglment': '14',
+             {'natural': 'face with hair', 'target': 'face with blonde hair', 'strength': '4', 'disentanglment': '25',
               'save': 'blonde'},
-             {'natural': 'face with hair', 'target': 'face with grey hair', 'strength': '3', 'disentanglment': '14',
+             {'natural': 'face with hair', 'target': 'face with grey hair', 'strength': '8', 'disentanglment': '20',
               'save': 'grey'},
-             {'natural': 'face with hair', 'target': 'face with white hair', 'strength': '5', 'disentanglment': '14',
+             {'natural': 'face with hair', 'target': 'face with white hair', 'strength': '10', 'disentanglment': '10',
               'save': 'white'},
-             {'natural': 'face with hair', 'target': 'face with red hair', 'strength': '3', 'disentanglment': '14',
+             {'natural': 'face with hair', 'target': 'face with red hair', 'strength': '5', 'disentanglment': '15',
               'save': 'red'},
-             {'natural': 'face with hair', 'target': 'face with ginger hair', 'strength': '5', 'disentanglment': '14',
+             {'natural': 'face with hair', 'target': 'face with ginger hair', 'strength': '8', 'disentanglment': '25',
               'save': 'ginger'},
 
              ]
@@ -125,6 +125,6 @@ def main(namelist):
 
 
 if __name__ == "__main__":
-     CelebName = ["Kanye","Taylor", "GAGA"]
+     CelebName = ["Beyonce" ]
      #createFiles(CelebName)
      main(CelebName)
