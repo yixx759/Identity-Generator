@@ -11,25 +11,34 @@ testgroup = 10
 
 
 
-#by either creating a 0 strength prompt or saving code using init of default starting image and add at first node
-
-
-# #use get dt2 codes load codes instead of latents
-#
-# #facial hair add to the end of bangs and no bangs and one that has no cahanges already
-#
+# Non permanent change
 Changeurl = "http://localhost:5000/ChangeIdentity"
+# Permanent change and saves codes for later
 ChangePermurl = "http://localhost:5000/ChangeIdentityPerm"
+# Permanent change and dose not save codes for later
 ChangePermOtherurl = "http://localhost:5000/ChangeIdentityPermOther"
+# Close current session
 close = "http://localhost:5000/close"
 
+# Return to previously saved code on top of identity list.
 returncode = "http://localhost:5000/bringback"
+# Removes top code on identity list
 popcode = "http://localhost:5000/pop"
 
-#maybe have last set of prompt not permchange just temporary
+
+# Classes goal to manage different sets of prompts to add.
+# This means for each set added it will go through every combination.
+# Creating a consistent file structure which can be used with match finder.
+# Similar to a linked list.
 
 class Identity():
+
+    # IdentityPath - the base directory the results will be saved too.
+    # Next - the next set of identity's
+    # prev - the previous set of identity's
     def __init__(self, IdentityPath, ident, next: 'Identity', prev: 'Identity'):
+
+
         self.ident = ident
 
         self.prev = prev
@@ -43,6 +52,11 @@ class Identity():
 
 
     def add(self, newident ):
+
+        # If this is the last link then a new identity is made the new next identity
+        # and this link no longer last.
+        # If it is not the last link it will recursively call the next link and add it there.
+
         if self.next == None:
             self.next = Identity(None,newident,None, self)
             self.last = False
@@ -60,33 +74,48 @@ class Identity():
     def matchfinder(self, target:str, filenames = [], path = None):
         if (path == None):
                 path = self.IdentityPath
-        print('\n\nentred loop')
+
         #loop through input list and through file structure to find match
-        print(os.listdir(path))
+
         for files in os.listdir(path):
             filepath = os.path.join(path, files)
             if (os.path.isdir(filepath)):
-                print("\n\nFolder path")
-                print(filepath)
+
                 filenames = self.matchfinder(target,filenames, filepath)
-                print('exited')
+
 
             if (files.endswith(".jpg") and files == target+".jpg"):
-                print("\n\nImage path")
-                print(filepath)
+
                 filenames.append(filepath)
 
+        # Will return a list of paths to matching identitys images.
         return filenames
 
 
     def callprompts(self, promlist = []):
         identcopy = deepcopy(self.ident)
-        #
-        #
-        # #to refactor if last node then 2 diffrent loops if not normal loop, if last do non perm change on every identity
-        # #go through each prompt using a loop and each one added is nested in the next, except the last one gose though all at once
-        # #see if codes or dt can be saved and cached
-        #
+
+        # Loops through each combination of identitys in the link.
+        # Save path for first identity is equal to IdentityPath attribute
+        # The next set adds its name to the previous identitys path.
+        # Prompt 1 -> .\CustomIdentities\Identity1\NewIdentitys\Short hair.jpg
+        # Prompt 2 -> .\CustomIdentities\Identity1\NewIdentitys\Short hair\brown.jpg
+
+        # As it goes from one prompt list to another recursively,
+        # it will save the code of the edit to return to without having to reload the latent.
+        # As it executes through the list it will stop saving at the second last.
+        # At the last set of prompts it will loop through the list without saving as their are no further edits from that point.
+        # This saves time from reloading the code.
+
+        # After it loops through the last set of prompts it then pops the last saved code and reloads the code before that.
+        # EG short hair -> brown -> no bangs(saved) -> big lips -> (closed eyes - open eyes - natural eyes)
+        # Instead of re doing hair -> brown -> no bangs, we can jump to no bangs be reloading the code:
+        # short hair -> brown -> no bangs
+        # then -> thin lips and looping through closed eyes - open eyes - natural eyes
+
+        #This is done recursivley so after each prompt in the list is done it will pop again
+        # Reloading to the one before that just popped one.
+
         if (self.first == True):
             temp = deepcopy(self.ident[0])
             temp['strength'] = '0'
@@ -96,6 +125,7 @@ class Identity():
                 os.makedirs(self.IdentityPath)
 
         if self.last == True and self.first == True:
+            # If only one set of prompts it will loop through without saving anything.
             for num, identitys in enumerate(self.ident):
                 self.ident[num]['save']= self.IdentityPath + '/' + self.ident[num]['save']
                 r = requests.get(Changeurl, params=identitys)
@@ -103,37 +133,31 @@ class Identity():
 
         elif self.last == True:
             for num, identitys in enumerate(self.ident):
-                print("Entred")
+                #Loops through without saving to save time.
                 self.ident[num]['save'] = promlist[len(promlist) - 1]['save'] + '/' + self.ident[num]['save']
                 r = requests.get(Changeurl, params=identitys)
-                print(r.url)
-
-            print(promlist)
 
             promlist.pop()
             self.ident = identcopy
+
         else:
             for i in range(len(self.ident)):
-
                 if (self.first == True):
                     self.ident[i]['save']= self.IdentityPath + '/' + self.ident[i]['save']
                 else:
-
+                    # Using previous save location to save from.
                     self.ident[i]['save'] = promlist[len(promlist) - 1]['save'] + '/' + self.ident[i]['save']
+
                 promlist.append(self.ident[i])
 
-
                 if(self.next.last == False):
-                    print("\n\n\n\npromptlist")
-                    print(promlist)
+
                     r = requests.get(ChangePermurl, params=self.ident[i])
-                    print(self.ident[i]['target'])
-                    print(r.url)
+
                 else:
-                    print(promlist)
+
                     r = requests.get(ChangePermOtherurl, params=self.ident[i])
-                    print(self.ident[i]['target'])
-                    print(r.url)
+
 
                 if not os.path.exists(self.ident[i]['save']):
                     os.makedirs(self.ident[i]['save'])
@@ -141,7 +165,6 @@ class Identity():
 
                 r = requests.get(returncode)
 
-                print(r.url)
 
 
 #applying twice maybe pop twice short hair is beinng applied twice
@@ -334,7 +357,7 @@ def main():
 
     for i in range(testgroup):
 
-    #
+        # Defines save location using iterator
         current = i+1
         changelatent = "http://localhost:5000/changerIdent/"+str(current)
         path = "./CustomIdentities/Identity" + str(current)
@@ -344,17 +367,18 @@ def main():
         if not os.path.exists(basepath):
              os.makedirs(basepath)
 
+        #Copies matching normalized result into identities latent info file.
         shutil.copy("./static/Dataset Tester"+str(i)+"/finallatent.pt",basepath+"/latents.pt")
         ex = Namespace(real=True, dataset_name="ffhq", IdentityNum=str(i+1), Loadtype=3)
         GetGUIData(ex)
-    #    print("using this")
+
+        # Loads latent to be used
         requests.get(changelatent)
         print("using this")
         hairpath = path + "/NewIdentitys"
-        #check if codes is only thing needed
-        # deep copy before prompts sending in as well
-        # hairtemp = deepcopy hair if way to avoid find in class
 
+
+        # Deep copy as not to bring identity 1's file path into identity 2's
         master = Identity(hairpath,deepcopy(hair), None, None)
 
         master.add(deepcopy(hair2))
@@ -373,7 +397,7 @@ def main():
 
         master.callprompts()
 
-
+        # Switching latents can be memory intensive so freeing this memory avoids OOM's
         requests.get(close)
 
 if __name__ == "__main__":
