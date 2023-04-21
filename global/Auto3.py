@@ -100,10 +100,11 @@ class ImageEditorFunctions():  #Controller
         print("Here "+str(input))
         print(str(self.style_clip.beta))
         img=self.style_clip.GetImg()
+        arr = img
         print('manipulate one Beta')
         img=Image.fromarray(img)
 
-        return img
+        return img, arr
 
     
     def TargetEdit(self, input):
@@ -128,6 +129,22 @@ class ImageEditorFunctions():  #Controller
 
 
         self.style_clip.neutral= input
+    def EditImage(self, NeutralPoint, TargetEdit, Strength, Disentanglement, savechange, savecode):
+
+        self.NeutralForm(NeutralPoint)
+        self.TargetEdit(TargetEdit)
+        self.ChangeStrength(Strength)
+        img , arr  = self.ChangeAreaAffected(Disentanglement)
+
+
+        if(savecode == True):
+            self.ident.append(self.SetBaseCode())
+
+        elif (savechange == True):
+            self.SetBaseCode()
+
+        return img, arr
+
 
     
 

@@ -99,11 +99,10 @@ def dataset():
     disentanglment = request.args.get('disentanglment')
     saveloc = request.args.get('save')
     print(target)
-    master.NeutralForm(naturalPoint)
-    img2, tmp = master.TargetEdit(target)
-    img2 = master.ChangeStrength(strength)
-    img2 = master.ChangeAreaAffected(disentanglment)
-    master.SetBaseCode()
+
+
+    img2, tmp = master.EditImage(naturalPoint, target, strength, disentanglment, True, False)
+
     arr.append(tmp)
 
     CreatePNGforDataset(img2, saveloc)
@@ -125,14 +124,10 @@ def initdataset():
     disentanglment = request.args.get('disentanglment')
     saveloc = request.args.get('save')
 
-    master.NeutralForm(naturalPoint)
 
-    img2, tmp = master.TargetEdit(target)
 
-    img2 = master.ChangeStrength(strength)
-    img2 = master.ChangeAreaAffected(disentanglment)
+    img2, tmp = master.EditImage(naturalPoint, target, strength, disentanglment, True, False)
 
-    master.SetBaseCode()
     arr.append(tmp)
 
     CreateCompressedJPG(img2, saveloc)
@@ -163,12 +158,9 @@ def ChangeIdentity():
     disentanglment = request.args.get('disentanglment')
     saveloc = request.args.get('save')
     print(target)
-    master.NeutralForm(naturalPoint)
 
-    img2, _ = master.TargetEdit(target)
-    img2 = master.ChangeStrength(strength)
-    img2 = master.ChangeAreaAffected(disentanglment)
 
+    img2, _ = master.EditImage(naturalPoint, target, strength, disentanglment, False, False)
 
     CreateCompressedJPG(img2, saveloc)
 
@@ -197,12 +189,9 @@ def ChangeIdentityPermOther():
     disentanglment = request.args.get('disentanglment')
     saveloc = request.args.get('save')
     print(target)
-    master.NeutralForm(naturalPoint)
 
-    img2, _ = master.TargetEdit(target)
-    img2 = master.ChangeStrength(strength)
-    img2 = master.ChangeAreaAffected(disentanglment)
-    master.SetBaseCode()
+
+    img2, _ = master.EditImage(naturalPoint, target, strength, disentanglment, True, False)
 
     CreateCompressedJPG(img2, saveloc)
 
@@ -236,12 +225,10 @@ def ChangeIdentityPerm():
     disentanglment = request.args.get('disentanglment')
     saveloc = request.args.get('save')
     print(target)
-    master.NeutralForm(naturalPoint)
 
-    img2, _ = master.TargetEdit(target)
-    img2 = master.ChangeStrength(strength)
-    img2 = master.ChangeAreaAffected(disentanglment)
-    master.ident.append(master.SetBaseCode())
+
+    img2, _ = master.EditImage(naturalPoint, target, strength, disentanglment, False, True)
+
 
     CreateCompressedJPG(img2, saveloc)
 
@@ -284,10 +271,7 @@ def datasetresult():
     master.SetBaseCode()
     return render_template("hello.html")
 
-# @app.route('/reset')
-# def reset():
-#     global master
-#     master.style_clip.reset()
+
 
 @app.route('/close')
 def close():

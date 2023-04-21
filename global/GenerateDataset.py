@@ -52,14 +52,14 @@ params2 = [{'natural':'person with clothes ', 'target':'person with white shirt'
 {'natural':'Person with glasses', 'target':'Person with no glasses','strength':'3','disentanglment':'14','save':'2'},
 
 {'natural':'hair', 'target':'tidy dark hair ','strength':'3','disentanglment':'17','save':'2'},
-{'natural':'person', 'target':'person  smiling','strength':'-3','disentanglment':'13','save':'7'},
+{'natural':'person', 'target':'person  smiling','strength':'-3','disentanglment':'16','save':'7'},
 {'natural':'person open mouth', 'target':'person  closed mouth','strength':'2','disentanglment':'10','save':'2'},
 {'natural':'child', 'target':'adult','strength':'2','disentanglment':'15','save':'2'},
 {'natural':'brown eyes', 'target':'blue eyes','strength':'-6','disentanglment':'19','save':'2'},
 {'natural':'busy background', 'target':'simple background','strength':'3.619','disentanglment':'10','save':'2'},
-{'natural':'colored background', 'target':'white background','strength':'2.65','disentanglment':'15','save':'2'}]
+{'natural':'colored background', 'target':'white background','strength':'8.65','disentanglment':'12','save':'2'}]
 
-parmas3 = {'natural':'face side view', 'target':'face front view','strength':'25','disentanglment':'8','save':'2'}
+parmas3 = {'natural':'face side view', 'target':'face front view','strength':'25','disentanglment':'8.3','save':'2'}
 
 
 url = "http://localhost:5000/dataset"
@@ -97,7 +97,7 @@ for i2 in range(Testgroup):
     # This simply applies the normalisation prompts to the new image saving a timeline along the way.
     for i in range(len(params2)):
         params2[i]['save'] = str(i+1)
-        #params2[i]['save'] = "Dataset Tester"+ str(i2)+"/"+params2[i]['save']
+
         params2[i]['save'] = "Dataset Tester"+ str(i2)+"/"+params2[i]['save']
         r = requests.get(url, params=params2[i])
         print(r.url)
