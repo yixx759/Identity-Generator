@@ -1,6 +1,6 @@
 from GenerateRand import GetRandLatent
 import requests
-import GetGUIData
+import GetLatentInfo
 from argparse import Namespace
 import os
 import tensorflow as tf
@@ -73,10 +73,10 @@ for i2 in range(Testgroup):
     photofile = "F:/Challenges/StyleCLIP/global/Dataset/Photos/"+str(i2) +".jpg"
     ex = Namespace(real=True, dataset_name="ffhq", LatentNum=str(i2), Loadtype=2)
     # This will generate the image information from the latent eg Image with correct color and w_plus.npy
-    GetGUIData.main(ex)
+    GetLatentInfo.main(ex)
     # This will generate the latent information from the now correct looking image.
     getnewlatent(filenamel,photofile)
-    GetGUIData.main(ex)
+    GetLatentInfo.main(ex)
 
     # This url will change the latent loaded into the gpu with the corresponding number in dataset files.
     url3 = "http://localhost:5000/changer/" + str(i2)
@@ -93,7 +93,7 @@ for i2 in range(Testgroup):
     # To use the new rotated identity it will need to be encoded again as the agressive rotation usally generates artifacts
     # this will have a normalisation effect.
     getnewlatent(filenamel, photofile)
-    GetGUIData.main(ex)
+    GetLatentInfo.main(ex)
     # This simply applies the normalisation prompts to the new image saving a timeline along the way.
     for i in range(len(params2)):
         params2[i]['save'] = str(i+1)

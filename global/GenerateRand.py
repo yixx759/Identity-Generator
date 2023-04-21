@@ -3,7 +3,7 @@ from optimization.run_optimization import main
 import torchvision
 import os
 from argparse import Namespace
-import GetGUIData
+import GetLatentInfo
 
 
 def GetRandLatent(results_dir, latent_dir, photo_dir):
@@ -43,7 +43,7 @@ if __name__ == "__main__":
 
 
     ex = Namespace(real=True, dataset_name="ffhq", Loadtype = 1)
-    GetGUIData.main(ex)
+    GetLatentInfo.main(ex)
 
 
 

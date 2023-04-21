@@ -2,7 +2,7 @@ import os
 import shutil
 from argparse import Namespace
 import requests
-from GetGUIData import main as GetGUIData
+from GetLatentInfo import main as GetLatentData
 from copy import deepcopy
 import tensorflow as tf
 
@@ -370,7 +370,7 @@ def main():
         #Copies matching normalized result into identities latent info file.
         shutil.copy("./static/Dataset Tester"+str(i)+"/finallatent.pt",basepath+"/latents.pt")
         ex = Namespace(real=True, dataset_name="ffhq", IdentityNum=str(i+1), Loadtype=3)
-        GetGUIData(ex)
+        GetLatentData(ex)
 
         # Loads latent to be used
         requests.get(changelatent)
