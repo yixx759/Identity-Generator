@@ -25,13 +25,21 @@ class StyleCLIP():
 
 
     def reset(self):
+        # Clears memory used by previous models
+
         tf.keras.backend.clear_session()
 
     def close(self):
+        # Closes the current gpu session in tensorflow freeing up recources.
+        # Although it will take time to reset.
+
         self.M.closesession()
 
 
     def LoadData(self, dataset_name, place = "", num=0, norm = 1):
+        # Loads latent data from specified path below.
+        # This is using the above parameters.
+
         newnorm = loadtype(norm)
 
         tf.keras.backend.clear_session()
@@ -70,20 +78,28 @@ class StyleCLIP():
             self.c_threshold=20
         else:
             self.c_threshold=100
-        self.SetInitP()
+        self.SetBaseCodesP()
     
-    def SetInitP(self):
+    def SetBaseCodesP(self):
+        # Assigns the latent codes to edit from.
+
+
+
+
         self.M.alpha=[3]
         self.M.num_images=1
         
         self.target=''
         self.neutral=''
-        self.GetDt2()
+        self.ApplyChanges()
         img_index=0
         self.M.dlatent_tmp=[tmp[img_index:(img_index+1)] for tmp in self.M.dlatents]
         
         
-    def GetDt2(self):
+    def ApplyChanges(self):
+
+        # When the target is changed and the edit needs to be made use this function to apply the change to get the correct codes.
+
         classnames=[self.target,self.neutral]
         dt=GetDt(classnames,self.model)
         
@@ -114,28 +130,20 @@ class StyleCLIP():
         
     
     def GetCode(self):
-        #boundary_tmp2,num_c=GetBoundary(self.fs3,self.dt,self.M,threshold=self.beta)
+        # Generating codes that define what a face looks like, and its position in latent space.
+        # From the variables defined before strength disentanglement neutral position target position.
         boundary_tmp2, num_c = GetBoundary(self.fs3, self.dt, self.M, self.beta)
         codes=self.M.MSCode(self.M.dlatent_tmp,boundary_tmp2)
 
 
         return codes
 
-    # def Generaterand(self,codes):
-    #     for i2 in range(len(codes)):
-    #         for i in range(len(codes[i2][0])):
-    #
-    #             codes[i2][0][i] = random.uniform(-5.1,5.1)
-    #
-    #
-    #     for i in codes:
-    #         print(i)
-    #         print(len(i))
-    #         print(i[0][0])
+
 
 
     def GetImg(self):
-
+        # From the codes which define what the face looks like we can generate
+        # an array to convert to an image.
 
         codes=self.GetCode()
 
@@ -145,15 +153,7 @@ class StyleCLIP():
         img=out[0,0]
         return img
 
-    def spit_latent(self):
-        out = torch.zeros((1,18,512))
-        for i in range(18):
-            out[0][i] = torch.tensor(self.dt)
 
-        print("\n\n\n\n\n\n")
-        print(out)
-        print("\n\n\n\n\n\n")
-        torch.save(out, "./test/latents.pt")
 #%%
 if __name__ == "__main__":
     style_clip=StyleCLIP()

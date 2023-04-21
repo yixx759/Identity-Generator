@@ -2,11 +2,10 @@ import os
 
 
 from tkinter import Tk
-import torch
 
 from PIL import Image, ImageTk
 from tkinter.filedialog import askopenfilename
-from G2I import View
+from GUI import View
 from Inference import StyleCLIP
 import argparse
 #%%
@@ -56,9 +55,12 @@ class PlayInteractively():  #Controller
         else:
             self.style_clip.M.dlatent_tmp = [tmp[:, 0] for tmp in self.prevholder]
 
+
+
+
     
     def Reset(self,event):
-        self.style_clip.GetDt2()
+        self.style_clip.ApplyChanges()
         self.style_clip.M.alpha=[0]
         
         self.view.beta.set(self.style_clip.beta)
@@ -121,7 +123,7 @@ class PlayInteractively():  #Controller
         
         print('target',tmp,'###')
         self.style_clip.target=tmp
-        self.style_clip.GetDt2()
+        self.style_clip.ApplyChanges()
         self.view.beta.set(self.style_clip.beta)
         self.view.alpha.set(3)
         self.style_clip.M.alpha=[3]
@@ -183,7 +185,7 @@ class PlayInteractively():  #Controller
         self.style_clip.M.dlatent_tmp=[tmp[img_index:(img_index+1)] for tmp in self.style_clip.M.dlatents]
         
         
-        self.style_clip.GetDt2()
+        self.style_clip.ApplyChanges()
         self.view.beta.set(self.style_clip.beta)
         self.view.alpha.set(3)
         

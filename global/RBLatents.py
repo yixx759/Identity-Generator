@@ -9,6 +9,15 @@ from GetLatent import main as getlatent
 testgroup = 10
 promptcount = 15
 
+# This program will remove the background of the last image to be edited.
+# Adding a white background.
+# Then encodes the image which has the affect of generating the latent while also making the face more normalised
+# fixing the artifacts.
+
+
+
+# This batch file will activate the stable diffusion api
+
 subprocess.Popen("start Activate.bat", shell=True)
 
 

@@ -4,9 +4,11 @@ from PIL import Image
 import subprocess
 
 def main(input, output):
+    # This program will use stable diffusion to remove the background
+    # then add this image with a transparent image to a white background.
+    # It is saved as RGB vs RGBA as any transparency information will cause the encoder not to work.
 
 
-    #"F:/Challenges/StableTest/0.jpg"
     with open(input, "rb") as imgfile:
         my_string = base64.b64encode(imgfile.read())
 
@@ -35,20 +37,14 @@ def main(input, output):
 
     background = Image.open(backpath).convert("RGBA")
 
-    #background.save(output)
+
     print("Heeere")
     im = Image.open(filename).convert("RGBA")
-    # background = Image.new("RGBA", im.size)
-    # background.alpha_composite(temp)
-    #background.alpha_composite(im)
-    #im = im.convert("RGBA")
-    #im.save(output)
-    #background.paste(im, (0,0))
+
 
     background.paste(im, (0,0), im)
 
-    #background.save(output)
-    #remove alpha for encodeing
+
     background.convert("RGB").save(output)
 
 if __name__ == "__main__":

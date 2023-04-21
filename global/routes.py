@@ -13,51 +13,48 @@ First = True
 
 @app.before_first_request
 def before_first_request():
+    # Initializes tensorflow session so that it can be used by the functions.
     global master
-    master = Auto3.PlayInteractively()
+    master = Auto3.ImageEditorFunctions()
 
 
 
-def serve_pil_image(pil_img,saveto):
-    print("here!!!!!!!!!!!!!!!")
-    pil_img.save('./static/'+saveto+'.JPG', 'JPEG')
-    img1 = Image.open('./data/ffhq/0.jpg')
-    img1.save('./static/0.JPG', 'JPEG')
+def CreateJPGUncompressedImage(pil_img, saveto):
 
-def serve_pil_image2(pil_img,saveto):
-    print("here!!!!!!!!!!!!!!!")
+    pil_img.save('./'+saveto+'.JPG', 'JPEG')
+
+
+def CreatePNGforDataset(pil_img, saveto):
+
     pil_img.save('./static/'+saveto+'.png')
 
 
-def serve_pil_image3(pil_img,saveto):
-    print("here!!!!!!!!!!!!!!!")
-    pil_img.save('./static/'+saveto+'.tiff', compression='jpeg')
-    #img1 = Image.open('./data/ffhq/0.jpg')
-    #img1.save('./static/0.JPG', 'JPEG')
-    #
-def serve_pil_image4(pil_img,saveto):
-    print("here!!!!!!!!!!!!!!!")
-    pil_img.save(saveto+'.jpg', compression='jpeg', quality=90, optimize = True)
-    #img1 = Image.open('./data/ffhq/0.jpg')
-    #img1.save('./static/0.JPG', 'JPEG')
+def CreateTIFFTimeline(pil_img, saveto):
 
-@app.route('/change/<int:num>')
-def changephoto(num):
-    master.openfn(str(num))
+    pil_img.save('./static/'+saveto+'.tiff', compression='jpeg')
+
+def CreateCompressedJPG(pil_img, saveto):
+
+    pil_img.save(saveto+'.jpg', compression='jpeg', quality=90, optimize = True)
+
+
+
 
 @app.route('/changer/<int:num>')
-def changelatent(num):
+def changeDatasetLatent(num):
+    # Select the dataset latent corresponding with the num parameter.
+    # .\Dataset\W_plus\w_plus(num).npy
     master.changeLatent("",num, 2)
 
 @app.route('/changerIdent/<int:num>')
-def changeIdentity(num):
+def changeIdentityLatent(num):
+    # Select the identity latent corresponding with the num parameter.
+    # .\CustomIdentities\Identity(num)\BaseIdentity\w_plus.npy
     master.changeLatent('',num, 3)
 
 @app.route('/changerTrue/<path:path>')
-def changeTrue(path):
-    print('\n\n\n')
-    print('\n\n\nlabel')
-    print(path)
+def changeLatent(path):
+    # Select the latent found in path.
     master.changeLatent(path,0, 4)
 
 
@@ -66,12 +63,15 @@ def changeTrue(path):
 
 @app.route('/bringback')
 def bringback():
+    # Take the last identity in the identity list and use that to edit.
+
     global master
-    master.SetInit(master.ident[len(master.ident)-1])
+    master.SetBaseCode(master.ident[len(master.ident) - 1])
     return 'returned'
 
 @app.route('/pop')
 def pop():
+    # Take the last Identity off the list.
     global master
     master.ident.pop()
     print("\n\n\n\n\n")
@@ -81,126 +81,130 @@ def pop():
 
 
 
-@app.route('/result')
-def result():
-    global master
-    #master = Auto2.PlayInteractively()
-    text = request.args.get('target')
-    text2 = request.args.get('natural')
-    num1 = request.args.get('strength')
-    num2 = request.args.get('disentanglment')
-    saveloc = request.args.get('save')
-    print(text)
-    master.text_n(text2)
-    img2 = master.ChangeAlpha(num1)
-    img2 = master.ChangeBeta(num2)
-    img2tmp = master.text_t(text)
-    img2 = img2tmp[0]
-    print("22here!!!!!!!!!!!!!!!")
-    serve_pil_image(img2, saveloc)
-    master.SetInit()
-    return render_template("hello.html")
 
 @app.route('/dataset')
 def dataset():
+    # Generate changes for a dataset and normalises the face.
+    # After the image is generated it is added onto an array so a timeline of the changes
+    # at each stage can be scrolled through.
+
     global master
 
 
     global arr
-    #master = Auto2.PlayInteractively()
-    text = request.args.get('target')
-    text2 = request.args.get('natural')
-    num1 = request.args.get('strength')
-    num2 = request.args.get('disentanglment')
-    saveloc = request.args.get('save')
-    print(text)
-    master.text_n(text2)
 
-    img2, tmp = master.text_t(text)
-    #take arr and add the results ontop of eachother caoncatanate then display to see full proggression
-    img2 = master.ChangeAlpha(num1)
-    img2 = master.ChangeBeta(num2)
-    master.SetInit()
+    target = request.args.get('target')
+    naturalPoint = request.args.get('natural')
+    strength = request.args.get('strength')
+    disentanglment = request.args.get('disentanglment')
+    saveloc = request.args.get('save')
+    print(target)
+    master.NeutralForm(naturalPoint)
+    img2, tmp = master.TargetEdit(target)
+    img2 = master.ChangeStrength(strength)
+    img2 = master.ChangeAreaAffected(disentanglment)
+    master.SetBaseCode()
     arr.append(tmp)
 
-    serve_pil_image2(img2, saveloc)
+    CreatePNGforDataset(img2, saveloc)
 
     return render_template("hello.html")
 
 @app.route('/initdataset')
 def initdataset():
+    # Used for initializing an image to be used for normalization.
+    # It also adds these results to the timeline array.
     global master
 
 
     global arr
-    #master = Auto2.PlayInteractively()
-    text = request.args.get('target')
-    text2 = request.args.get('natural')
-    num1 = request.args.get('strength')
-    num2 = request.args.get('disentanglment')
+
+    target = request.args.get('target')
+    naturalPoint = request.args.get('natural')
+    strength = request.args.get('strength')
+    disentanglment = request.args.get('disentanglment')
     saveloc = request.args.get('save')
-    print(text)
-    master.text_n(text2)
 
-    img2, tmp = master.text_t(text)
-    #take arr and add the results ontop of eachother caoncatanate then display to see full proggression
-    img2 = master.ChangeAlpha(num1)
-    img2 = master.ChangeBeta(num2)
+    master.NeutralForm(naturalPoint)
 
-    master.SetInit()
+    img2, tmp = master.TargetEdit(target)
+
+    img2 = master.ChangeStrength(strength)
+    img2 = master.ChangeAreaAffected(disentanglment)
+
+    master.SetBaseCode()
     arr.append(tmp)
 
-    serve_pil_image4(img2, saveloc)
-    serve_pil_image4(img2, "./here/yum")
+    CreateCompressedJPG(img2, saveloc)
+
 
     return render_template("hello.html")\
 
 @app.route('/ChangeIdentity')
 def ChangeIdentity():
+    # Used to change Identity.
+    # Saves as a compressed jpg and can be saved anywhere.
+    # Does not contribute to the normalization timeline.
+
+    # This function is unique as it doesn't save the codes after execution.
+    # For example going from brown hair -> blonde. The next edit to ginger
+    # will be brown -> ginger and not blonde -> ginger.
+
+    #This also dose not save the identity to be used later.
+
     global master
 
 
     global arr
-    #master = Auto2.PlayInteractively()
-    text = request.args.get('target')
-    text2 = request.args.get('natural')
-    num1 = request.args.get('strength')
-    num2 = request.args.get('disentanglment')
+
+    target = request.args.get('target')
+    naturalPoint = request.args.get('natural')
+    strength = request.args.get('strength')
+    disentanglment = request.args.get('disentanglment')
     saveloc = request.args.get('save')
-    print(text)
-    master.text_n(text2)
-    img2 = master.ChangeAlpha(num1)
-    img2 = master.ChangeBeta(num2)
-    img2, _ = master.text_t(text)
-    #take arr and add the results ontop of eachother caoncatanate then display to see full proggression
+    print(target)
+    master.NeutralForm(naturalPoint)
+
+    img2, _ = master.TargetEdit(target)
+    img2 = master.ChangeStrength(strength)
+    img2 = master.ChangeAreaAffected(disentanglment)
 
 
-    serve_pil_image4(img2, saveloc)
+    CreateCompressedJPG(img2, saveloc)
 
 
     return render_template("hello.html")
 
 @app.route('/ChangeIdentityPermOther')
 def ChangeIdentityPermOther():
+
+    # Used to change Identity.
+    # Saves as a compressed jpg and can be saved anywhere.
+    # Does not contribute to the normalization timeline.
+
+    # This function saves the code to be used in the next edit.
+    # For example going from brown hair -> blonde. The next edit to ginger
+    # will be blonde -> ginger and not brown -> ginger.
+
+    # This also dose not save the identity to be used later.
+
     global master
-
-
     global arr
-    #master = Auto2.PlayInteractively()
-    text = request.args.get('target')
-    text2 = request.args.get('natural')
-    num1 = request.args.get('strength')
-    num2 = request.args.get('disentanglment')
-    saveloc = request.args.get('save')
-    print(text)
-    master.text_n(text2)
-    img2 = master.ChangeAlpha(num1)
-    img2 = master.ChangeBeta(num2)
-    img2, _ = master.text_t(text)
-    #take arr and add the results ontop of eachother caoncatanate then display to see full proggression
-    master.SetInit()
 
-    serve_pil_image4(img2, saveloc)
+    target = request.args.get('target')
+    naturalPoint = request.args.get('natural')
+    strength = request.args.get('strength')
+    disentanglment = request.args.get('disentanglment')
+    saveloc = request.args.get('save')
+    print(target)
+    master.NeutralForm(naturalPoint)
+
+    img2, _ = master.TargetEdit(target)
+    img2 = master.ChangeStrength(strength)
+    img2 = master.ChangeAreaAffected(disentanglment)
+    master.SetBaseCode()
+
+    CreateCompressedJPG(img2, saveloc)
 
 
     return render_template("hello.html")
@@ -211,26 +215,35 @@ def ChangeIdentityPermOther():
 
 @app.route('/ChangeIdentityPerm')
 def ChangeIdentityPerm():
+
+    # Used to change Identity.
+    # Saves as a compressed jpg and can be saved anywhere.
+    # Does not contribute to the normalization timeline.
+
+    # This function saves the code to be used in the next edit.
+    # For example going from brown hair -> blonde. The next edit to ginger
+    # will be blonde -> ginger and not brown -> ginger.
+
+    # This also dose save the identity to be used later and adds to the list.
+
+
     global master
-
-
     global arr
-    #master = Auto2.PlayInteractively()
-    text = request.args.get('target')
-    text2 = request.args.get('natural')
-    num1 = request.args.get('strength')
-    num2 = request.args.get('disentanglment')
+
+    target = request.args.get('target')
+    naturalPoint = request.args.get('natural')
+    strength = request.args.get('strength')
+    disentanglment = request.args.get('disentanglment')
     saveloc = request.args.get('save')
-    print(text)
-    master.text_n(text2)
+    print(target)
+    master.NeutralForm(naturalPoint)
 
-    img2, _ = master.text_t(text)
-    img2 = master.ChangeAlpha(num1)
-    img2 = master.ChangeBeta(num2)
-    #take arr and add the results ontop of eachother caoncatanate then display to see full proggression
-    master.ident.append(master.SetInit())
+    img2, _ = master.TargetEdit(target)
+    img2 = master.ChangeStrength(strength)
+    img2 = master.ChangeAreaAffected(disentanglment)
+    master.ident.append(master.SetBaseCode())
 
-    serve_pil_image4(img2, saveloc)
+    CreateCompressedJPG(img2, saveloc)
 
 
     return render_template("hello.html")
@@ -249,6 +262,9 @@ def ChangeIdentityPerm():
 
 @app.route('/datasetresult')
 def datasetresult():
+    # This will convert our array into one large vertical image the user
+    # that means the user can scroll down and view the changes as they are done in stages.
+
     global master
     global arr
 
@@ -264,8 +280,8 @@ def datasetresult():
 
 
 
-    serve_pil_image3(img, "Dataset Tester/result" )
-    master.SetInit()
+    CreateTIFFTimeline(img, "Dataset Tester/result")
+    master.SetBaseCode()
     return render_template("hello.html")
 
 # @app.route('/reset')
@@ -275,6 +291,7 @@ def datasetresult():
 
 @app.route('/close')
 def close():
+    # Closes session freeing memory.
     global master
     master.close()
 
@@ -284,7 +301,7 @@ def close():
 
 if __name__ == '__main__':
     app.run('127.0.0.1', 5000, debug=True, threaded=False)
-
+# Threading would mean multiple sessions are created causing errors.
 
 
 

@@ -6,7 +6,10 @@ from argparse import Namespace
 import GetGUIData
 
 
-def mainhere(results_dir, latent_dir, photo_dir):
+def GetRandLatent(results_dir, latent_dir, photo_dir):
+    # This will generate a random latent and corresponding image to be normalised.
+    # This image will have darker colors and will need to be corrected with get gui data.
+
     args = {
         "description": 'A person with purple hair',
         "ckpt": "stylegan2-ffhq-config-f.pt",
@@ -27,7 +30,7 @@ def mainhere(results_dir, latent_dir, photo_dir):
         "photo_dir": photo_dir
     }
     result_image = main(Namespace(**args))
-
+    # This will save the random persons face as a picture
     torchvision.utils.save_image(result_image.detach().cpu(), os.path.join(args["results_dir"], args["photo_dir"]),
                                  normalize=True, scale_each=True, range=(-1, 1))
 
@@ -36,7 +39,7 @@ def mainhere(results_dir, latent_dir, photo_dir):
 
 
 if __name__ == "__main__":
-    mainhere("./data/ffhq","./data/ffhq/latents.pt","0.jpg")
+    GetRandLatent("./data/ffhq", "./data/ffhq/latents.pt", "0.jpg")
 
 
     ex = Namespace(real=True, dataset_name="ffhq", Loadtype = 1)

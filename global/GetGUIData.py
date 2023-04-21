@@ -10,10 +10,20 @@ from Inference import loadtype
 
 
 def main(ags):
-    if (ags.Loadtype == None):
-        loader = loadtype.Play
-    else:
+
+    # This will generate a W_plus file and image from a latent file.
+
+    # Load type defines what path the latent will be found.
+    try:
+
         loader = loadtype(ags.Loadtype)
+
+    except:
+        loader = loadtype.Play
+
+
+
+
 
     dataset_name = ags.dataset_name
 

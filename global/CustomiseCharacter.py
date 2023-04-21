@@ -109,12 +109,7 @@ class Identity():
                 print(r.url)
 
             print(promlist)
-            #
-            #print('reset')
-            #tf.reset_default_graph()
-            #print("new session")
-            #requests.get(close)
-            #requests.get(changelatent)
+
             promlist.pop()
             self.ident = identcopy
         else:
@@ -223,16 +218,16 @@ def main():
     ]
 
     hair4 = [
-        {'natural': 'face', 'target': 'facial hair', 'strength': '15', 'disentanglment': '16', 'save': 'beard'},
-        {'natural': 'face', 'target': 'facial hair', 'strength': '12', 'disentanglment': '16',
+        {'natural': 'face', 'target': 'facial hair', 'strength': '15', 'disentanglment': '14.6', 'save': 'beard'},
+        {'natural': 'face', 'target': 'facial hair', 'strength': '12', 'disentanglment': '14.6',
          'save': 'strong facial hair'},
-        {'natural': 'face', 'target': 'facial hair', 'strength': '9', 'disentanglment': '16',
+        {'natural': 'face', 'target': 'facial hair', 'strength': '9', 'disentanglment': '14.6',
          'save': 'medium facial hair'},
-        {'natural': 'face', 'target': 'facial hair', 'strength': '7.5', 'disentanglment': '16',
+        {'natural': 'face', 'target': 'facial hair', 'strength': '7.5', 'disentanglment': '14.6',
          'save': 'light facial hair'},
-        {'natural': 'face', 'target': 'facial hair', 'strength': '6', 'disentanglment': '16',
+        {'natural': 'face', 'target': 'facial hair', 'strength': '6', 'disentanglment': '14.6',
          'save': 'very light facial hair'},
-        {'natural': 'face', 'target': 'facial hair', 'strength': '0', 'disentanglment': '16', 'save': 'no facial hair'},
+        {'natural': 'face', 'target': 'facial hair', 'strength': '0', 'disentanglment': '14.6', 'save': 'no facial hair'},
         {'natural': 'face', 'target': 'face with stubble', 'strength': '6', 'disentanglment': '11', 'save': 'stubble'},
         {'natural': 'face', 'target': 'face with stubble', 'strength': '9', 'disentanglment': '11',
          'save': 'heavy stubble'},
@@ -330,9 +325,9 @@ def main():
 
     # glasses and sunglassses
     hair13 = [
-        {'natural': 'face', 'target': 'earings', 'strength': '7', 'disentanglment': '10.4', 'save': 'earings'},
+        {'natural': 'face', 'target': 'earings', 'strength': '9', 'disentanglment': '9.2', 'save': 'earings'},
         {'natural': 'face', 'target': 'earings', 'strength': '0', 'disentanglment': '10.4', 'save': 'no earings'},
-        {'natural': 'face', 'target': 'face with glasses', 'strength': '6.47', 'disentanglment': '14.8',
+        {'natural': 'face', 'target': 'face with glasses', 'strength': '6.47', 'disentanglment': '10.8',
          'save': 'glasses'},
 
     ]

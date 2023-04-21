@@ -2,14 +2,21 @@ from PIL import Image
 import numpy
 
 
+# When provided with two images it will generate a gif interpolating or "Fading" between the two
+# This can be used with match finder in Customise character to creat diffrent animation for all instances of a change.
+# eg all diffrent blink combinations for all diffrent faces.
 
 def main(start, end,savename):
+    # start - Image to begin
+    # end - Image to face to
+    # savename - Image save location
 
     def makegif(frames):
         frameone = frames[0]
         frameone.save(savename+".gif", format="GIF", append_images = frames, save_all=True ,duration = 100, quality = 50, optimize = True )
 
     def lerp(pix, pix2, interp):
+        #Interpolates the pixel color value of the two images give a middle value.
         newarray = pix[:] + (pix2[:] - pix[:])*interp
 
         return newarray

@@ -4,12 +4,9 @@ import os
 
 import torch
 import torchvision
-from torch import optim
-from tqdm import tqdm
 
-from criteria.clip_loss import CLIPLoss
 from models.stylegan2.model import Generator
-import clip
+
 from utils import ensure_checkpoint_exists
 
 
@@ -24,7 +21,7 @@ def get_lr(t, initial_lr, rampdown=0.25, rampup=0.05):
 
 def main(args):
     ensure_checkpoint_exists(args.ckpt)
-    #text_inputs = torch.cat([clip.tokenize(args.description)]).cuda()
+
     os.makedirs(args.results_dir, exist_ok=True)
 
     g_ema = Generator(args.stylegan_size, 512, 8)
@@ -34,66 +31,29 @@ def main(args):
     mean_latent = g_ema.mean_latent(4096)
     new = mean_latent.detach().clone().repeat(1, 18, 1)
     print(new.size())
-    # if args.latent_path:
-    #     latent_code_init = torch.load(args.latent_path).cuda()
-    # elif args.mode == "edit":
+
     latent_code_init_not_trunc = torch.randn(1, 512).cuda()
     print(latent_code_init_not_trunc.size())
 
     with torch.no_grad():
         _, latent_code_init = g_ema([latent_code_init_not_trunc], return_latents=True,
                                     truncation=args.truncation, truncation_latent=mean_latent)
-        #latent_code_init.
+
         print(latent_code_init.size())
-    # else:
+
 
     print(latent_code_init[0][:2][:].size())
     print(latent_code_init[0].size())
-    #latent_code_init[0] = torch.cat((latent_code_init[0],latent_code_init[0][:2][:]),-1)
+
     new[0] = torch.cat((latent_code_init[0],latent_code_init[0][:2][:]))
-    #latent_code_init = latent_code_init.detach().clone().repeat(1, 18, 1)
+
     print(latent_code_init.size())
     print(latent_code_init)
     print(new)
     latent = new.detach().clone()
     latent.requires_grad = True
 
-    #return latent
-    # clip_loss = CLIPLoss(args)
-    #
-    # optimizer = optim.Adam([latent], lr=args.lr)
-    #
-    # pbar = tqdm(range(args.step))
 
-    # for i in pbar:
-    #     t = i / args.step
-    #     lr = get_lr(t, args.lr)
-    #     optimizer.param_groups[0]["lr"] = lr
-    #
-    #     img_gen, _ = g_ema([latent], input_is_latent=True, randomize_noise=False)
-    #
-    #     c_loss = clip_loss(img_gen, text_inputs)
-    #
-    #     if args.mode == "edit":
-    #         l2_loss = ((latent_code_init - latent) ** 2).sum()
-    #         loss = c_loss + args.l2_lambda * l2_loss
-    #     else:
-    #         loss = c_loss
-    #
-    #     optimizer.zero_grad()
-    #     loss.backward()
-    #     optimizer.step()
-    #
-    #     pbar.set_description(
-    #         (
-    #             f"loss: {loss.item():.4f};"
-    #         )
-    #     )
-        # if args.save_intermediate_image_every > 0 and i % args.save_intermediate_image_every == 0:
-        #     with torch.no_grad():
-        #         img_gen, _ = g_ema([latent], input_is_latent=True, randomize_noise=False)
-        #
-        #     torchvision.utils.save_image(img_gen, f"results/{str(i).zfill(5)}.png", normalize=True, range=(-1, 1))
 
     if args.mode == "edit":
         with torch.no_grad():
@@ -107,11 +67,10 @@ def main(args):
         torch.save(gr, args.latent_dir)
         print("\n\n\n\n\n\n")
 
-        #final_result = torch.cat([img_orig, img_gen])
+
         final_result = img_orig
 
-    #else:
-        #final_result = img_gen
+
 
 
     return final_result
