@@ -2,7 +2,7 @@ import os
 from argparse import Namespace
 
 import requests
-from GetGUIData import main as GetGUIData
+from GetLatentInfo import main as GetGUIData
 from GetLatent import main as GetLatent
 from CustomiseCharacter import Identity
 from copy import deepcopy
