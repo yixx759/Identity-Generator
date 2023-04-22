@@ -20,58 +20,34 @@ def get_lr(t, initial_lr, rampdown=0.25, rampup=0.05):
 
 
 def main(args):
+
     ensure_checkpoint_exists(args.ckpt)
-
     os.makedirs(args.results_dir, exist_ok=True)
-
     g_ema = Generator(args.stylegan_size, 512, 8)
     g_ema.load_state_dict(torch.load(args.ckpt)["g_ema"], strict=False)
     g_ema.eval()
     g_ema = g_ema.cuda()
     mean_latent = g_ema.mean_latent(4096)
     new = mean_latent.detach().clone().repeat(1, 18, 1)
-    print(new.size())
-
     latent_code_init_not_trunc = torch.randn(1, 512).cuda()
-    print(latent_code_init_not_trunc.size())
+
 
     with torch.no_grad():
         _, latent_code_init = g_ema([latent_code_init_not_trunc], return_latents=True,
                                     truncation=args.truncation, truncation_latent=mean_latent)
 
-        print(latent_code_init.size())
-
-
-    print(latent_code_init[0][:2][:].size())
-    print(latent_code_init[0].size())
 
     new[0] = torch.cat((latent_code_init[0],latent_code_init[0][:2][:]))
-
-    print(latent_code_init.size())
-    print(latent_code_init)
-    print(new)
     latent = new.detach().clone()
     latent.requires_grad = True
-
-
 
     if args.mode == "edit":
         with torch.no_grad():
 
             img_orig, gr = g_ema([new], input_is_latent=True, randomize_noise=False)
 
-        print("\n\n\n\n\n\nheeeeeeeeeeeeeee")
-        print(gr)
-        print(gr[0][0])
-        print(gr.size())
         torch.save(gr, args.latent_dir)
-        print("\n\n\n\n\n\n")
-
-
         final_result = img_orig
-
-
-
 
     return final_result
 

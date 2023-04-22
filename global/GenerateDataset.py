@@ -6,13 +6,7 @@ import os
 import tensorflow as tf
 from GetLatent import main as getnewlatent
 
-
-
-
-
-
-
-Testgroup= 10
+Testgroup= 3
 for i in range(Testgroup):
     # Generates new random latens
     filename = "Latent" + str(i)+".pt"
@@ -63,8 +57,13 @@ parmas3 = {'natural':'face side view', 'target':'face front view','strength':'25
 
 
 url = "http://localhost:5000/dataset"
-url5 = "http://localhost:5000/initdataset"
 url4= "http://localhost:5000/close"
+
+
+url5 = "http://localhost:5000/initdataset"
+
+
+
 for i2 in range(Testgroup):
     # Iterated through the number of latents using the iterator i.
 

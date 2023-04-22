@@ -4,12 +4,9 @@ from argparse import Namespace
 import requests
 from GetLatentInfo import main as GetLatentData
 from copy import deepcopy
-import tensorflow as tf
 
-testgroup = 10
+testgroup = 1
 #CustomIdentities
-
-
 
 # Non permanent change
 Changeurl = "http://localhost:5000/ChangeIdentity"
@@ -32,7 +29,6 @@ popcode = "http://localhost:5000/pop"
 # Similar to a linked list.
 
 class Identity():
-
     # IdentityPath - the base directory the results will be saved too.
     # Next - the next set of identity's
     # prev - the previous set of identity's
@@ -167,8 +163,7 @@ class Identity():
 
 
 
-#applying twice maybe pop twice short hair is beinng applied twice
-            #add pop url
+
 
             r = requests.get(popcode)
             print("popped")
@@ -384,15 +379,15 @@ def main():
         master.add(deepcopy(hair2))
         master.add(deepcopy(hair3))
 
-        master.add(deepcopy(hair5))
-        master.add(deepcopy(hair6))
-        master.add(deepcopy(hair7))
-        master.add(deepcopy(hair8))
-        master.add(deepcopy(hair9))
-        master.add(deepcopy(hair10))
-        master.add(deepcopy(hair11))
-        master.add(deepcopy(hair12))
-        master.add(deepcopy(hair13))
+        # master.add(deepcopy(hair5))
+        # master.add(deepcopy(hair6))
+        # master.add(deepcopy(hair7))
+        # master.add(deepcopy(hair8))
+        # master.add(deepcopy(hair9))
+        # master.add(deepcopy(hair10))
+        # master.add(deepcopy(hair11))
+        # master.add(deepcopy(hair12))
+        # master.add(deepcopy(hair13))
         master.add(deepcopy(hair4))
 
         master.callprompts()

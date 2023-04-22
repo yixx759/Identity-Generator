@@ -5,7 +5,6 @@ import requests
 from RemoveBackground import main as remove
 from GetLatent import main as getlatent
 
-
 testgroup = 10
 promptcount = 15
 
@@ -14,13 +13,9 @@ promptcount = 15
 # Then encodes the image which has the affect of generating the latent while also making the face more normalised
 # fixing the artifacts.
 
-
-
 # This batch file will activate the stable diffusion api
 
 subprocess.Popen("start Activate.bat", shell=True)
-
-
 
 while True:
         try:
@@ -31,11 +26,7 @@ while True:
         except:
             print("no connection")
 
-
-
 for i2 in range(testgroup):
-
-
         target = "F:/Challenges/StyleCLIP/global/static/Dataset Tester" + str(i2) + "/" + str(promptcount)+".png"
         newtarget = "F:/Challenges/StyleCLIP/global/static/Dataset Tester" + str(i2) + "/" + str(promptcount+1)+".png"
         remove(target, newtarget)

@@ -26,7 +26,8 @@ def main(saveloc, imgeloc, dest = None):
         os.remove("//wsl.localhost/Ubuntu-20.04/home/m/encoder4editing/imagefrom/"+names)
 
     shutil.copy(imgeloc, "//wsl.localhost/Ubuntu-20.04/home/m/encoder4editing/imagefrom/")
-    os.system('wsl ~ -e sh -c ". ~/miniconda3/etc/profile.d/conda.sh; conda activate e4e_env;  cd encoder4editing; ~/miniconda3/envs/e4e_env/bin/python scripts/inference.py --align --images_dir=imagefrom --save_dir=output check/e4e_ffhq_encode.pt"')
+    os.system('wsl ~ -e sh -c ". ~/miniconda3/etc/profile.d/conda.sh; conda activate e4e_env;  cd encoder4editing; '
+              '~/miniconda3/envs/e4e_env/bin/python scripts/inference.py --align --images_dir=imagefrom --save_dir=output check/e4e_ffhq_encode.pt"')
 
     shutil.move(source, saveloc)
     shutil.copy("//wsl.localhost/Ubuntu-20.04/home/m/encoder4editing/output/inversions/00001.jpg", dest)
@@ -35,4 +36,5 @@ def main(saveloc, imgeloc, dest = None):
 
 if (__name__ == "__main__"):
 
-    os.system('wsl ~ -e sh -c ". ~/miniconda3/etc/profile.d/conda.sh; conda activate e4e_env;  cd encoder4editing; ~/miniconda3/envs/e4e_env/bin/python scripts/inference.py --align --images_dir=imagefrom --save_dir=output check/e4e_ffhq_encode.pt"')
+    os.system('wsl ~ -e sh -c ". ~/miniconda3/etc/profile.d/conda.sh; conda activate e4e_env;  cd encoder4editing;'
+              ' ~/miniconda3/envs/e4e_env/bin/python scripts/inference.py --align --images_dir=imagefrom --save_dir=output check/e4e_ffhq_encode.pt"')

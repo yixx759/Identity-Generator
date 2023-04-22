@@ -1,4 +1,3 @@
-import argparse
 from optimization.run_optimization import main
 import torchvision
 import os
@@ -8,7 +7,7 @@ import GetLatentInfo
 
 def GetRandLatent(results_dir, latent_dir, photo_dir):
     # This will generate a random latent and corresponding image to be normalised.
-    # This image will have darker colors and will need to be corrected with get gui data.
+    # This image will have darker colors and will need to be corrected with get gui data or get latent info.
 
     args = {
         "description": 'A person with purple hair',

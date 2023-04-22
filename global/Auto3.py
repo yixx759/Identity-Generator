@@ -72,7 +72,7 @@ class ImageEditorFunctions():  #Controller
         print('set init ')
         return codes
     
-    def ChangeStrength(self, input=7.0):
+    def ChangeStrength(self, StrengthFactor=7.0):
         # This changes the Strength of the modification.
         # For example the prompt to make the picture Smile with a input of 1 will have a smirk
         # whereas an input value of 10 is a full teeth smile
@@ -80,15 +80,16 @@ class ImageEditorFunctions():  #Controller
 
 
 
-        self.style_clip.M.alpha=[float(input)]
+        self.style_clip.M.alpha=[float(StrengthFactor)]
         print(self.style_clip.M.alpha)
         img=self.style_clip.GetImg()
+        arr = img
         print('manipulate one Alpha')
         img=Image.fromarray(img)
 
-        return img
+        return img ,arr
         
-    def ChangeAreaAffected(self, input=20):
+    def ChangeAreaAffected(self, DisentanglementFactor=20):
         # This changes the Disentanglement of the modification.
         # This number defines the amount of channels that will be modified.
         # Make sure to note it's the lower the number the more channels modified.
@@ -96,8 +97,8 @@ class ImageEditorFunctions():  #Controller
         # the more parts of the face will be affected.
 
 
-        self.style_clip.beta=float(input)/100
-        print("Here "+str(input))
+        self.style_clip.beta= float(DisentanglementFactor) / 100
+        print("Here " + str(DisentanglementFactor))
         print(str(self.style_clip.beta))
         img=self.style_clip.GetImg()
         arr = img
@@ -107,11 +108,11 @@ class ImageEditorFunctions():  #Controller
         return img, arr
 
     
-    def TargetEdit(self, input):
+    def TargetEdit(self, DesiredEdit):
         # This function changes the "target" to edit too.
         # This input is the affect we want to make or the result we want to see of th the image.
 
-        self.style_clip.target= input
+        self.style_clip.target= DesiredEdit
         self.style_clip.ApplyChanges()
         img=self.style_clip.GetImg()
         arr = img
@@ -122,20 +123,19 @@ class ImageEditorFunctions():  #Controller
         return img, arr
         
         
-    def NeutralForm(self, input="Face with hair"):
+    def NeutralForm(self, BaseForm="Face with hair"):
         # This is the base from which we edit from.
         # The input should be a description of what the image without editing looks like.
         # Make note that similar phrases have diffrent effects eg person with x vs face with x
 
 
-        self.style_clip.neutral= input
+        self.style_clip.neutral= BaseForm
     def EditImage(self, NeutralPoint, TargetEdit, Strength, Disentanglement, savechange, savecode):
 
         self.NeutralForm(NeutralPoint)
         self.TargetEdit(TargetEdit)
         self.ChangeStrength(Strength)
         img , arr  = self.ChangeAreaAffected(Disentanglement)
-
 
         if(savecode == True):
             self.ident.append(self.SetBaseCode())

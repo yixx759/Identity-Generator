@@ -2,13 +2,10 @@ from PIL import Image
 from flask import Flask, request,render_template
 import Auto3
 import numpy as np
-from Inference import loadtype
-
 
 app = Flask(__name__)
-start = False
+
 arr = []
-First = True
 
 
 @app.before_first_request
@@ -16,6 +13,8 @@ def before_first_request():
     # Initializes tensorflow session so that it can be used by the functions.
     global master
     master = Auto3.ImageEditorFunctions()
+
+
 
 
 
@@ -60,11 +59,32 @@ def changeLatent(path):
 
 
 
+@app.route('/', methods=['GET', 'POST'])
+def index():
+
+
+    global start
+    global master
+    if request.method == 'POST':
+        text = request.form["text"]
+        text2 = request.form["neutral"]
+        num1 = request.form["Strength"]
+        num2 = request.form["Disentangle"]
+        print(text)
+
+        master.NeutralForm(text2)
+        img2, _ = master.TargetEdit(text)
+        img2, _ = master.ChangeAreaAffected(num2)
+        img2, _ = master.ChangeStrength(num1)
+
+        CreatePNGforDataset(img2, "1")
+    return render_template("hello.html")
+
+
 
 @app.route('/bringback')
 def bringback():
     # Take the last identity in the identity list and use that to edit.
-
     global master
     master.SetBaseCode(master.ident[len(master.ident) - 1])
     return 'returned'
@@ -79,6 +99,25 @@ def pop():
     return 'returned'
 
 
+@app.route('/result')
+def result():
+    global master
+    text = request.args.get('target')
+    text2 = request.args.get('natural')
+    num1 = request.args.get('strength')
+    num2 = request.args.get('disentanglment')
+    saveloc = request.args.get('save')
+
+    img2, _ = master.EditImage(text2, text, num1, num2, True, False )
+
+    CreatePNGforDataset(img2, saveloc)
+
+    return render_template("hello.html")
+
+
+
+
+
 
 
 
@@ -87,26 +126,17 @@ def dataset():
     # Generate changes for a dataset and normalises the face.
     # After the image is generated it is added onto an array so a timeline of the changes
     # at each stage can be scrolled through.
-
     global master
-
-
     global arr
-
     target = request.args.get('target')
     naturalPoint = request.args.get('natural')
     strength = request.args.get('strength')
     disentanglment = request.args.get('disentanglment')
     saveloc = request.args.get('save')
     print(target)
-
-
     img2, tmp = master.EditImage(naturalPoint, target, strength, disentanglment, True, False)
-
     arr.append(tmp)
-
     CreatePNGforDataset(img2, saveloc)
-
     return render_template("hello.html")
 
 @app.route('/initdataset')
@@ -114,26 +144,16 @@ def initdataset():
     # Used for initializing an image to be used for normalization.
     # It also adds these results to the timeline array.
     global master
-
-
     global arr
-
     target = request.args.get('target')
     naturalPoint = request.args.get('natural')
     strength = request.args.get('strength')
     disentanglment = request.args.get('disentanglment')
     saveloc = request.args.get('save')
-
-
-
     img2, tmp = master.EditImage(naturalPoint, target, strength, disentanglment, True, False)
-
     arr.append(tmp)
-
     CreateCompressedJPG(img2, saveloc)
-
-
-    return render_template("hello.html")\
+    return render_template("hello.html")
 
 @app.route('/ChangeIdentity')
 def ChangeIdentity():
