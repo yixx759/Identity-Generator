@@ -7,6 +7,8 @@ def main(input, output):
     # This program will use stable diffusion to remove the background
     # then add this image with a transparent image to a white background.
     # It is saved as RGB vs RGBA as any transparency information will cause the encoder not to work.
+
+    #for an iamge to be sent to the api it needs to be base 64 encoded
     with open(input, "rb") as imgfile:
         my_string = base64.b64encode(imgfile.read())
 

@@ -12,7 +12,7 @@ def GetRandLatent(results_dir, latent_dir, photo_dir):
     args = {
         "description": 'A person with purple hair',
         "ckpt": "stylegan2-ffhq-config-f.pt",
-        "stylegan_size": 512,
+        "stylegan_size": 1024,
         "lr_rampup": 0.05,
         "lr": 0.1,
         "step": 300,
