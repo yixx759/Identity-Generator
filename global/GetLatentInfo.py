@@ -42,24 +42,20 @@ def main(ags):
 
     # %%
 
-    if ags.real:
-        if(loader == loadtype.Play):
 
-            latents = torch.load('./data/' + dataset_name + '/latents.pt')
-        elif(loader == loadtype.DataNorm):
-            latents = torch.load('./Dataset/Latents/Latent' + ags.LatentNum + '.pt')
-        elif(loader == loadtype.Customident):
-            latents = torch.load('./CustomIdentities/Identity' + ags.IdentityNum + '/BaseIdentity/latents.pt')
-        elif(loader == loadtype.Truecustom):
-            latents = torch.load(ags.IdentityPath+"/latents.pt")
+    if(loader == loadtype.Play):
 
-        w_plus = latents.cpu().detach().numpy()
+        latents = torch.load('./data/' + dataset_name + '/latents.pt')
+    elif(loader == loadtype.DataNorm):
+        latents = torch.load('./Dataset/Latents/Latent' + ags.LatentNum + '.pt')
+    elif(loader == loadtype.Customident):
+        latents = torch.load('./CustomIdentities/Identity' + ags.IdentityNum + '/BaseIdentity/latents.pt')
+    elif(loader == loadtype.Truecustom):
+        latents = torch.load(ags.IdentityPath+"/latents.pt")
 
-    else:
-        w = np.load('./npy/' + dataset_name + '/W.npy')
-        tmp = w[:50]  # only use 50 images
-        tmp = tmp[:, None, :]
-        w_plus = np.tile(tmp, (1, M.Gs.components.synthesis.input_shape[1], 1))
+    w_plus = latents.cpu().detach().numpy()
+
+
     if (loader == loadtype.Play):
 
         np.save('./data/' + dataset_name + '/w_plus.npy', w_plus)
