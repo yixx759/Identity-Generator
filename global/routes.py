@@ -72,10 +72,7 @@ def index():
         num2 = request.form["Disentangle"]
         print(text)
 
-        master.NeutralForm(text2)
-        img2, _ = master.TargetEdit(text)
-        img2, _ = master.ChangeAreaAffected(num2)
-        img2, _ = master.ChangeStrength(num1)
+        img2, _ = master.EditImage(text2, text, num1, num2, True, False)
 
         CreatePNGforDataset(img2, "1")
     return render_template("hello.html")

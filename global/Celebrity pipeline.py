@@ -87,30 +87,15 @@ def createFiles(list):
 def main(namelist):
 
      for name in namelist:
-
-
         start = "./Celebrities/"
         path = os.path.join(start, name)
-
         basepath = os.path.join(path,"BaseIdentity")
-
-
-
         changelatent = "http://localhost:5000/changerTrue/"+basepath
-
         GetLatent(basepath+"/latents.pt",basepath+"/0.jpg", basepath+"/1.jpg")
-
         ex = Namespace(real=True, dataset_name="ffhq", IdentityPath=basepath, Loadtype=4)
         GetGUIData(ex)
-
-
-
-
-        #    print("using this")
         requests.get(changelatent)
-
         expressPath = path + "/baseExpressions"
-        print("\n\n\n\n\n\nHEEEEEEEEEEEEEEEERRRRRRRRRRRRRRREEEEEEEEEE\n\n\n\n\n\n\n\n")
         master = Identity(expressPath,deepcopy(express5),None,None )
         master.add(deepcopy(express4))
         master.add(deepcopy(express1))

@@ -6,7 +6,7 @@ import os
 import tensorflow as tf
 from GetLatent import main as getnewlatent
 
-Testgroup= 3
+Testgroup= 10
 for i in range(Testgroup):
     # Generates new random latens
     filename = "Latent" + str(i)+".pt"
