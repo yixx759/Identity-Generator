@@ -93,6 +93,7 @@ for i2 in range(Testgroup):
     # this will have a normalisation effect.
     getnewlatent(filenamel, photofile)
     GetLatentInfo.main(ex)
+
     # This simply applies the normalisation prompts to the new image saving a timeline along the way.
     for i in range(len(params2)):
         params2[i]['save'] = str(i+1)
@@ -102,6 +103,8 @@ for i2 in range(Testgroup):
         print(r.url)
 
         tf.reset_default_graph()
+
+    requests.get(url3)
     # Switching latents is memory intensive and its good to reset this.
     requests.get(url4)
     tf.reset_default_graph()
