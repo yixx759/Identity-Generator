@@ -1,4 +1,4 @@
-#Identity Generator Pipeline for games and image manipulation
+# Identity Generator Pipeline for games and image manipulation
 
 This project is made using StyleCLIP a project that can be found here: https://github.com/orpatashnik/StyleCLIP
 and this version as well: e4e + StyleCLIP w/ global colab (latest fix by [JustinJohn](https://github.com/justinjohn0306)):
